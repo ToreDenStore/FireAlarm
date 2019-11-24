@@ -1,16 +1,28 @@
+import { UserService } from './user.service';
+import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+   declarations: [
+      AppComponent,
+      UserComponent
+   ],
+   imports: [
+      BrowserModule,
+      AngularFireModule.initializeApp(environment.firebase,
+      'FireAlarm'),
+      AngularFirestoreModule
+   ],
+   providers: [
+     UserService
+   ],
+   bootstrap: [
+      AppComponent
+   ]
 })
 export class AppModule { }
