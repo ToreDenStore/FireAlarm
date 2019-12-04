@@ -1,3 +1,5 @@
+import { AlarmService } from './services/alarm.service';
+import { AlarmComponent } from './components/alarm/alarm.component';
 import { UserService } from './user.service';
 import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
@@ -10,7 +12,8 @@ import { UserComponent } from './user/user.component';
 @NgModule({
    declarations: [
       AppComponent,
-      UserComponent
+      UserComponent,
+      AlarmComponent
    ],
    imports: [
       BrowserModule,
@@ -19,7 +22,8 @@ import { UserComponent } from './user/user.component';
       AngularFirestoreModule
    ],
    providers: [
-     UserService
+     UserService,
+     AlarmService
    ],
    bootstrap: [
       AppComponent
