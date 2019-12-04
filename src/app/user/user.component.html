@@ -1,14 +1,38 @@
-<div *ngIf="users?.length > 0;else noUsersTemplate">
-  <ul *ngFor="let user of users">
-    <li>
-      {{user.name}} - {{user.sid}}
-    </li>
-  </ul>
+All users:
+<div *ngIf="usersSearching == false;else loadingTemplate">
+  <div *ngIf="users.length > 0;else notFoundTemplate">
+    <ul *ngFor="let user of users">
+      <li>
+        {{user.name}} - {{user.sid}} - {{user.id}}
+      </li>
+    </ul>
+  </div>
 </div>
 
-<ng-template #noUsersTemplate>
+User by S-ID:
+<div *ngIf="userBySidSearching == false;else loadingTemplate">
+  <div *ngIf="userBySid;else notFoundTemplate">
+    {{userBySid.name}} - {{userBySid.sid}}
+  </div>
+</div>
+
+User by reference:
+<div *ngIf="userByRefSearching == false;else loadingTemplate">
+  <div *ngIf="userByRef;else notFoundTemplate">
+    {{userByRef.name}} - {{userByRef.id}}
+  </div>
+</div>
+
+<ng-template #loadingTemplate>
   <hr>
   <h5>
     Loading users...
+  </h5>
+</ng-template>
+
+<ng-template #notFoundTemplate>
+  <hr>
+  <h5>
+    No user(s) found.
   </h5>
 </ng-template>

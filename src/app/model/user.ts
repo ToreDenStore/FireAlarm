@@ -1,7 +1,5 @@
-import { AlarmResponse } from './alarmResponse';
 export interface User {
-    id: string;
+    id?: string;
     sid: string;
     name: string;
-    alarmResponses: AlarmResponse[];
 }
