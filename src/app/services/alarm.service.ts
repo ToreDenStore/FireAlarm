@@ -17,6 +17,10 @@ export class AlarmService {
     return this.alarmCollection.valueChanges({ idField: 'id' });
   }
 
+  setStatus(ref: string, newStatus: number) {
+    return this.afs.doc<Alarm>('alarms/' + ref).update({status: newStatus});
+  }
+
   // usersCollection: AngularFirestoreCollection<User>;
   // // users: Observable<User[]>; // Data is decoupled from the reference of the data
   // userDocument: AngularFirestoreDocument<User>;

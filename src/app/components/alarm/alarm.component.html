@@ -2,3 +2,12 @@
 <h4>{{alarm.title}}:</h4>
 {{alarm | json}}
 
+<br>
+<button type="button" (click)="setStatus(1)">
+    Start alarm
+</button>
+
+<br>
+<button type="button" (click)="setStatus(2)">
+    Stop alarm
+</button>

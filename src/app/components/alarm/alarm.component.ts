@@ -17,4 +17,10 @@ export class AlarmComponent implements OnInit {
   ngOnInit() {
   }
 
+  setStatus(status: number) {
+    console.log('Setting alarm status to ' + status);
+    this.alarm.status = status;
+    this.alarmService.setStatus(this.alarm.id, status);
+  }
+
 }
