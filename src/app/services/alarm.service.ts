@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Alarm } from '../model/alarm';
+import { Alarm } from '../models/alarm';
 
 @Injectable({
   providedIn: 'root'

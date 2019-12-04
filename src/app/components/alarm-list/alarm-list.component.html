@@ -1,0 +1,24 @@
+All alarms:
+<div *ngIf="alarmsSearching == false;else loadingTemplate">
+  <div *ngIf="alarms.length > 0;else notFoundTemplate">
+    <ul *ngFor="let alarm of alarms">
+      <li>
+        <app-alarm [alarm] = alarm></app-alarm>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<ng-template #loadingTemplate>
+  <hr>
+  <h5>
+    Loading alarms...
+  </h5>
+</ng-template>
+  
+<ng-template #notFoundTemplate>
+  <hr>
+  <h5>
+    No alarm(s) found.
+  </h5>
+</ng-template>

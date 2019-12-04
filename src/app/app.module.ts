@@ -1,3 +1,4 @@
+import { AlarmListComponent } from './components/alarm-list/alarm-list.component';
 import { AlarmService } from './services/alarm.service';
 import { AlarmComponent } from './components/alarm/alarm.component';
 import { UserService } from './user.service';
@@ -13,7 +14,8 @@ import { UserComponent } from './user/user.component';
    declarations: [
       AppComponent,
       UserComponent,
-      AlarmComponent
+      AlarmComponent,
+      AlarmListComponent
    ],
    imports: [
       BrowserModule,
