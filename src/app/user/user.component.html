@@ -3,7 +3,7 @@ All users:
   <div *ngIf="users.length > 0;else notFoundTemplate">
     <ul *ngFor="let user of users">
       <li>
-        {{user.name}} - {{user.sid}} - {{user.id}}
+        {{user | json}}
       </li>
     </ul>
   </div>
@@ -19,7 +19,7 @@ User by S-ID:
 User by reference:
 <div *ngIf="userByRefSearching == false;else loadingTemplate">
   <div *ngIf="userByRef;else notFoundTemplate">
-    {{userByRef.name}} - {{userByRef.id}}
+    {{userByRef.name}} - {{userByRef.sid}}
   </div>
 </div>
 
