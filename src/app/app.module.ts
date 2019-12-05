@@ -1,3 +1,5 @@
+import { AlarmResponeService } from './services/alarm-respone.service';
+import { AlarmResponseComponent } from './components/alarm-response/alarm-response.component';
 import { AlarmListComponent } from './components/alarm-list/alarm-list.component';
 import { AlarmService } from './services/alarm.service';
 import { AlarmComponent } from './components/alarm/alarm.component';
@@ -15,17 +17,19 @@ import { UserComponent } from './user/user.component';
       AppComponent,
       UserComponent,
       AlarmComponent,
-      AlarmListComponent
+      AlarmListComponent,
+      AlarmResponseComponent
    ],
    imports: [
       BrowserModule,
       AngularFireModule.initializeApp(environment.firebase,
       'FireAlarm'),
-      AngularFirestoreModule
+      AngularFirestoreModule,
    ],
    providers: [
      UserService,
-     AlarmService
+     AlarmService,
+     AlarmResponeService
    ],
    bootstrap: [
       AppComponent
