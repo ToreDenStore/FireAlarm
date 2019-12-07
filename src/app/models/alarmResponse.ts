@@ -1,6 +1,7 @@
 export interface AlarmResponse {
-    userId: string;
+    id: string;
     alarmId: string;
-    status: number;
     date: Date;
+    status: number;
+    userId: string;
 }

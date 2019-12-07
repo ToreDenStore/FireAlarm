@@ -1,3 +1,18 @@
 <p>
   alarm-response works!
 </p>
+
+{{alarmResponse | json}}
+
+<br>
+<button type="button" (click)="setStatus(1)">
+    I am safe
+</button>
+<br>
+<button type="button" (click)="setStatus(2)">
+    I need help!
+</button>
+<br>
+<button type="button" (click)="setStatus(3)">
+    I am not in the place of risk
+</button>

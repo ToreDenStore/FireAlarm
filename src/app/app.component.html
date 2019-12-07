@@ -1,3 +1,7 @@
-<h1>Fire Alarm</h1>
-<app-user></app-user>
-<app-alarm-list></app-alarm-list>
+<h1>{{title}}</h1>
+<nav>
+  <a routerLink="/alarms">Alarms</a>
+  <a routerLink="/users">Users</a>
+</nav>
+
+<router-outlet></router-outlet>

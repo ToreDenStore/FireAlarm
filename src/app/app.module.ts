@@ -1,4 +1,4 @@
-import { AlarmResponeService } from './services/alarm-respone.service';
+import { AlarmResponseService } from './services/alarm-response.service';
 import { AlarmResponseComponent } from './components/alarm-response/alarm-response.component';
 import { AlarmListComponent } from './components/alarm-list/alarm-list.component';
 import { AlarmService } from './services/alarm.service';
@@ -23,15 +23,14 @@ import { AppRoutingModule } from './app-routing.module';
    ],
    imports: [
       BrowserModule,
-      AngularFireModule.initializeApp(environment.firebase,
-      'FireAlarm'),
+      AngularFireModule.initializeApp(environment.firebase, 'FireAlarm'),
       AngularFirestoreModule,
       AppRoutingModule
    ],
    providers: [
      UserService,
      AlarmService,
-     AlarmResponeService
+     AlarmResponseService
    ],
    bootstrap: [
       AppComponent
