@@ -1,13 +1,20 @@
 
 <h4>{{alarm.title}}:</h4>
-{{alarm | json}}
+
+<p>{{alarm.text}}</p>
 
 <br>
 <button type="button" (click)="setStatus(1)">
-    Start alarm
+  Start alarm
 </button>
 
 <br>
 <button type="button" (click)="setStatus(2)">
-    Stop alarm
+  Stop alarm
 </button>
+
+<div class="debug">
+  Debug area:
+  <br>
+  {{alarm | json}}
+</div>

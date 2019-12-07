@@ -9,3 +9,7 @@
     border-color: black;
     padding: 0.4%;
 }
+
+.debug {
+    color: red;
+}
