@@ -24,7 +24,10 @@
     <div *ngIf="alarms.length > 0;else notFoundTemplate">
       <ul *ngFor="let alarm of alarms">
         <li>
-          <app-alarm [alarm] = alarm></app-alarm>
+          {{alarm.title}}
+          <br>
+          Start time: {{alarm.startDate}}
+          <!-- Button to open up alarm -->
         </li>
       </ul>
     </div>
@@ -37,7 +40,11 @@
     <div *ngIf="alarms.length > 0;else notFoundTemplate">
       <ul *ngFor="let alarm of alarms">
         <li>
-          <app-alarm [alarm] = alarm></app-alarm>
+          {{alarm.title}}
+          <br>
+          Start time: {{alarm.startDate}}
+          End time: {{alarm.endDate}}
+          <!-- Button to open up alarm -->
         </li>
       </ul>
     </div>

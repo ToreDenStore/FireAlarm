@@ -1,4 +1,6 @@
 
+<!-- <button (click)="goBack()">Back</button> -->
+
 <h4>{{alarm.title}}:</h4>
 
 <p>{{alarm.text}}</p>
@@ -12,6 +14,22 @@
 <button type="button" (click)="setStatus(2)">
   Stop alarm
 </button>
+
+<!-- Statistics Area -->
+<!-- These values should be updated automatically by CF -->
+<div>
+  Users total in group: X
+  <br>
+  Users notified: X
+  <br>
+  Safe: X
+  <br>
+  Unsafe: X
+  <br>
+  Away: X
+  <br>
+  Last Updated: YYYY-MM-DD HH:mm
+</div>
 
 <div class="debug">
   Debug area:
