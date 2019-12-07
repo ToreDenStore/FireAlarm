@@ -35,6 +35,10 @@ export class AlarmComponent implements OnInit {
     this.alarmService.setStatus(this.alarm.id, status);
   }
 
+  deleteAlarm() {
+    this.alarmService.delete(this.alarm);
+  }
+
   // goBack() {
   //   throw new Error('Method not implemented.');
   //   // this.location.ancestorOrigins

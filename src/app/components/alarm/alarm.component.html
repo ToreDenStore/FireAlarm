@@ -4,6 +4,7 @@
 <h4>{{alarm.title}}:</h4>
 
 <p>{{alarm.text}}</p>
+<p>Status:<br>{{alarm.status}}</p>
 
 <br>
 <button type="button" (click)="setStatus(1)">
@@ -30,6 +31,11 @@
   <br>
   Last Updated: YYYY-MM-DD HH:mm
 </div>
+
+<br>
+<button type="button" (click)="deleteAlarm()">
+  Delete
+</button>
 
 <div class="debug">
   Debug area:

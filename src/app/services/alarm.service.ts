@@ -22,7 +22,11 @@ export class AlarmService {
   }
 
   createAlarm(newAlarm: Alarm) {
-    throw new Error('Method not implemented.');
+    this.alarmCollection.add(newAlarm);
+  }
+
+  delete(alarm: Alarm) {
+    this.alarmCollection.doc(alarm.id).delete();
   }
 
   setStatus(ref: string, newStatus: number) {

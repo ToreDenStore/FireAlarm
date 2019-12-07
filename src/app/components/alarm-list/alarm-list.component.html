@@ -8,8 +8,8 @@
 <div class="listDiv">
   Active alarms:
   <div *ngIf="alarmsSearching == false;else loadingTemplate">
-    <div *ngIf="alarms.length > 0;else notFoundTemplate">
-      <ul *ngFor="let alarm of alarms">
+    <div *ngIf="activeAlarms.length > 0;else notFoundTemplate">
+      <ul *ngFor="let alarm of activeAlarms">
         <li>
           <app-alarm [alarm] = alarm></app-alarm>
         </li>
@@ -21,8 +21,8 @@
 <div class="listDiv">
   Scheduled alarms:
   <div *ngIf="alarmsSearching == false;else loadingTemplate">
-    <div *ngIf="alarms.length > 0;else notFoundTemplate">
-      <ul *ngFor="let alarm of alarms">
+    <div *ngIf="scheduledAlarms.length > 0;else notFoundTemplate">
+      <ul *ngFor="let alarm of scheduledAlarms">
         <li>
           {{alarm.title}}
           <br>
@@ -37,8 +37,8 @@
 <div class="listDiv">
   Old alarms:
   <div *ngIf="alarmsSearching == false;else loadingTemplate">
-    <div *ngIf="alarms.length > 0;else notFoundTemplate">
-      <ul *ngFor="let alarm of alarms">
+    <div *ngIf="oldAlarms.length > 0;else notFoundTemplate">
+      <ul *ngFor="let alarm of oldAlarms">
         <li>
           {{alarm.title}}
           <br>
