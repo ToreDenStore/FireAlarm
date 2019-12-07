@@ -21,6 +21,10 @@ export class AlarmService {
     return this.alarmCollection.doc<Alarm>(ref).valueChanges();
   }
 
+  createAlarm(newAlarm: Alarm) {
+    throw new Error('Method not implemented.');
+  }
+
   setStatus(ref: string, newStatus: number) {
     return this.afs.doc<Alarm>('alarms/' + ref).update({status: newStatus});
   }

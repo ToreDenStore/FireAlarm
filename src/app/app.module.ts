@@ -1,3 +1,4 @@
+import { AlarmNewComponent } from './components/alarm-new/alarm-new.component';
 import { AlarmResponseService } from './services/alarm-response.service';
 import { AlarmResponseComponent } from './components/alarm-response/alarm-response.component';
 import { AlarmListComponent } from './components/alarm-list/alarm-list.component';
@@ -19,7 +20,8 @@ import { AppRoutingModule } from './app-routing.module';
       UserComponent,
       AlarmComponent,
       AlarmListComponent,
-      AlarmResponseComponent
+      AlarmResponseComponent,
+      AlarmNewComponent
    ],
    imports: [
       BrowserModule,
