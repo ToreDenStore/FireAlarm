@@ -1,3 +1,4 @@
+import { AdminComponent } from './components/admin/admin.component';
 import { AlarmNewComponent } from './components/alarm-new/alarm-new.component';
 import { AlarmResponseService } from './services/alarm-response.service';
 import { AlarmResponseComponent } from './components/alarm-response/alarm-response.component';
@@ -22,7 +23,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       AlarmComponent,
       AlarmListComponent,
       AlarmResponseComponent,
-      AlarmNewComponent
+      AlarmNewComponent,
+      AdminComponent
    ],
    imports: [
       BrowserModule,

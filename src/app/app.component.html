@@ -1,22 +1,4 @@
 <h1>{{title}}</h1>
 <div class="mainContainerDiv">
-  <!-- <nav>
-    <a routerLink="/alarms">Alarms</a>
-    <a routerLink="/users">Users</a>
-  </nav> -->
-  <ngb-tabset type="pills" justify="center">
-    <ngb-tab title="Alarms">
-      <ng-template ngbTabContent>
-        <app-alarm-list></app-alarm-list>
-      </ng-template>
-    </ngb-tab>
-    <ngb-tab title="Users">
-      <ng-template ngbTabContent>
-        <app-user></app-user>
-      </ng-template>
-    </ngb-tab>
-  </ngb-tabset>
-  
   <router-outlet></router-outlet>
 </div>
-
