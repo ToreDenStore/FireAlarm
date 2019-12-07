@@ -17,6 +17,10 @@ export class AlarmService {
     return this.alarmCollection.valueChanges({ idField: 'id' });
   }
 
+  getAlarmByRef(ref: string) {
+    return this.alarmCollection.doc<Alarm>(ref).valueChanges();
+  }
+
   setStatus(ref: string, newStatus: number) {
     return this.afs.doc<Alarm>('alarms/' + ref).update({status: newStatus});
   }

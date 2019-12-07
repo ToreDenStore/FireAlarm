@@ -23,8 +23,12 @@ export class AlarmResponseService {
     .valueChanges({ idField: 'id' });
   }
 
+  getAlarmResponseByRef(ref: string) {
+    return this.afs.doc<AlarmResponse>('alarmResponses/' + ref).valueChanges();
+  }
+
   setStatus(ref: string, newStatus: number) {
-    return this.afs.doc<AlarmResponse>('alarmResponsess/' + ref).update({status: newStatus});
+    return this.afs.doc<AlarmResponse>('alarmResponses/' + ref).update({status: newStatus});
   }
 
 }
