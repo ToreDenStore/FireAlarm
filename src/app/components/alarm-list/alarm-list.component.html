@@ -1,11 +1,46 @@
-All alarms:
-<div *ngIf="alarmsSearching == false;else loadingTemplate">
-  <div *ngIf="alarms.length > 0;else notFoundTemplate">
-    <ul *ngFor="let alarm of alarms">
-      <li>
-        <app-alarm [alarm] = alarm></app-alarm>
-      </li>
-    </ul>
+
+<div>
+  <button type="button">
+    + Create new alarm
+  </button>
+</div>
+
+<div class="listDiv">
+  Active alarms:
+  <div *ngIf="alarmsSearching == false;else loadingTemplate">
+    <div *ngIf="alarms.length > 0;else notFoundTemplate">
+      <ul *ngFor="let alarm of alarms">
+        <li>
+          <app-alarm [alarm] = alarm></app-alarm>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="listDiv">
+  Scheduled alarms:
+  <div *ngIf="alarmsSearching == false;else loadingTemplate">
+    <div *ngIf="alarms.length > 0;else notFoundTemplate">
+      <ul *ngFor="let alarm of alarms">
+        <li>
+          <app-alarm [alarm] = alarm></app-alarm>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="listDiv">
+  Old alarms:
+  <div *ngIf="alarmsSearching == false;else loadingTemplate">
+    <div *ngIf="alarms.length > 0;else notFoundTemplate">
+      <ul *ngFor="let alarm of alarms">
+        <li>
+          <app-alarm [alarm] = alarm></app-alarm>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 

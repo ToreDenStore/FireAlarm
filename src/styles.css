@@ -2,3 +2,10 @@
 .mainContainerDiv {
     text-align: center;
 }
+
+.listDiv {
+    border: 0.2%;
+    border-style: solid;
+    border-color: black;
+    padding: 0.4%;
+}
