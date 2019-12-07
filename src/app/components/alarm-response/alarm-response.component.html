@@ -1,3 +1,4 @@
+
 <p>
   alarm-response works!
 </p>
@@ -5,7 +6,14 @@
 {{alarmResponse | json}}
 
 <h1>{{alarm.title}}</h1>
-
+<p>{{alarm.text}}</p>
+<p>
+    Latest response:
+    <br>
+    Time: {{alarmResponse.date}}
+    <br>
+    Status: {{alarmResponse.status}}
+</p>
 <br>
 <button type="button" (click)="setStatus(1)">
     I am safe
@@ -16,5 +24,9 @@
 </button>
 <br>
 <button type="button" (click)="setStatus(3)">
-    I am not in the place of risk
+    I am not at the place of risk
 </button>
+<br>
+<div>
+    ---This is a placeholder for the map---
+</div>

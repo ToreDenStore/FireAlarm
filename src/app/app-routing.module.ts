@@ -7,7 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: 'alarms', component: AlarmListComponent },
   { path: 'users', component: UserComponent },
-  { path: 'response/:userId/:alarmId', component: AlarmResponseComponent }
+  { path: 'response/:id', component: AlarmResponseComponent }
 ];
 
 @NgModule({

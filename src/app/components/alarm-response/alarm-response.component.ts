@@ -22,6 +22,7 @@ export class AlarmResponseComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log('Initializing alarmResponse component');
     this.getAlarmResponse();
     this.getAlarm();
   }
