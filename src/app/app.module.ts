@@ -13,6 +13,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { UserComponent } from './user/user.component';
 import { AppRoutingModule } from './app-routing.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
    declarations: [
@@ -27,7 +28,8 @@ import { AppRoutingModule } from './app-routing.module';
       BrowserModule,
       AngularFireModule.initializeApp(environment.firebase, 'FireAlarm'),
       AngularFirestoreModule,
-      AppRoutingModule
+      AppRoutingModule,
+      NgbModule
    ],
    providers: [
      UserService,

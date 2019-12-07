@@ -6,9 +6,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'alarms', component: AlarmListComponent },
-  // { path: 'alarm/:id', component: AlarmComponent },
-  { path: 'users', component: UserComponent },
+  // { path: 'alarms', component: AlarmListComponent },
+  { path: 'alarm/:id', component: AlarmComponent },
+  // { path: 'users', component: UserComponent },
   { path: 'response/:id', component: AlarmResponseComponent }
 ];
 
