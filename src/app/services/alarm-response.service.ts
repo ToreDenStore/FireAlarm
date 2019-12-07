@@ -1,6 +1,6 @@
 import { AlarmResponse } from '../models/alarmResponse';
 import { Injectable } from '@angular/core';
-import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +8,7 @@ import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/fire
 export class AlarmResponseService {
 
   // alarmResponsesCollection: AngularFirestoreCollection<AlarmResponse>;
+  // alarmResponseDocument: AngularFirestoreDocument<AlarmResponse>;
 
   constructor(private afs: AngularFirestore) {
     // this.alarmResponsesCollection = this.afs.collection<AlarmResponse>('alarmReponses');
@@ -24,6 +25,8 @@ export class AlarmResponseService {
   }
 
   getAlarmResponseByRef(ref: string) {
+    // return this.alarmResponsesCollection.doc(ref).valueChanges();
+    console.log('Service trying to find alarmResponses/' + ref);
     return this.afs.doc<AlarmResponse>('alarmResponses/' + ref).valueChanges();
   }
 

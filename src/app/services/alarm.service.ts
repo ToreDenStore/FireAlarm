@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
 import { Alarm } from '../models/alarm';
 
 @Injectable({
@@ -17,8 +17,9 @@ export class AlarmService {
     return this.alarmCollection.valueChanges({ idField: 'id' });
   }
 
-  getAlarmByRef(ref: string) {
-    return this.alarmCollection.doc<Alarm>(ref).valueChanges();
+  getAlarmById(id: string) {
+    console.log('Service trying to get alarm by path ' + id);
+    return this.alarmCollection.doc<Alarm>(id).valueChanges();
   }
 
   createAlarm(newAlarm: Alarm) {

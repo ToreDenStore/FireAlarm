@@ -1,18 +1,24 @@
 
-<p>
+<!-- <p>
   alarm-response works!
-</p>
+</p> -->
 
-{{alarmResponse | json}}
+<!-- {{alarmResponse | json}} -->
 
 <h1>{{alarm.title}}</h1>
 <p>{{alarm.text}}</p>
 <p>
     Latest response:
     <br>
-    Time: {{alarmResponse.date}}
+    Id: {{alarmResponse.id}}
+    <br>
+    Time: {{alarmResponse.date | date: 'yyyy-MM-dd HH:mm'}}
     <br>
     Status: {{alarmResponse.status}}
+    <br>
+    User ID: {{alarmResponse.userId.id}}
+    <br>
+    Alarm ID: {{alarmResponse.alarmId.id}}
 </p>
 <br>
 <button type="button" (click)="setStatus(1)">

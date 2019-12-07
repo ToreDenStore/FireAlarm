@@ -1,7 +1,9 @@
+import { DocumentReference } from '@angular/fire/firestore';
+
 export interface AlarmResponse {
-    id: string;
-    alarmId: string;
+    id?: string;
+    alarmId: DocumentReference;
     date: Date;
     status: number;
-    userId: string;
+    userId: DocumentReference;
 }

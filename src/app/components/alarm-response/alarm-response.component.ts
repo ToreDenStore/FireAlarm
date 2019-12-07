@@ -24,11 +24,11 @@ export class AlarmResponseComponent implements OnInit {
   ngOnInit() {
     console.log('Initializing alarmResponse component');
     this.getAlarmResponse();
-    this.getAlarm();
   }
 
   getAlarm() {
-    this.alarmService.getAlarmByRef(this.alarmResponse.alarmId).subscribe(a => {
+    console.log('alarm id: ' + this.alarmResponse.alarmId.id);
+    this.alarmService.getAlarmById(this.alarmResponse.alarmId.id).subscribe(a => {
       console.log('alarm found: ' + a.title);
       this.alarm = a;
     });
@@ -38,8 +38,10 @@ export class AlarmResponseComponent implements OnInit {
     const alarmResponseId: string = this.route.snapshot.paramMap.get('id');
     console.log('alarm response id: ' + alarmResponseId);
     this.alarmResponseService.getAlarmResponseByRef(alarmResponseId).subscribe(r => {
-      console.log('Alarm Response found; id: ' + r);
+      console.log('Alarm Response found: ' + r);
       this.alarmResponse = r;
+      this.alarmResponse.id = alarmResponseId;
+      this.getAlarm();
     });
   }
 
