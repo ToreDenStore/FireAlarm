@@ -1,6 +1,8 @@
 import { AlarmResponse } from '../models/alarmResponse';
 import { Injectable } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import * as firebase from 'firebase/app';
+import Timestamp = firebase.firestore.Timestamp;
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +32,12 @@ export class AlarmResponseService {
   }
 
   setStatus(ref: string, newStatus: number) {
-    return this.alarmResponsesCollection.doc<AlarmResponse>(ref).update({status: newStatus});
+    return this.alarmResponsesCollection.doc<AlarmResponse>(ref).update(
+      {
+        status: newStatus,
+        date: Timestamp.fromDate(new Date())
+      }
+    );
   }
 
 }

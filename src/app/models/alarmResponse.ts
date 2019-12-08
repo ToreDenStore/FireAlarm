@@ -3,7 +3,7 @@ import { DocumentReference } from '@angular/fire/firestore';
 export interface AlarmResponse {
     id?: string;
     alarmId: DocumentReference;
-    date: Date;
+    date: firebase.firestore.Timestamp;
     status: number;
     userId: DocumentReference;
 }

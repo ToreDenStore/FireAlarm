@@ -4,7 +4,7 @@ import { AlarmResponse } from './../../models/alarmResponse';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Alarm } from 'src/app/models/alarm';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-alarm-response',

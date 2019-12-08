@@ -1,23 +1,14 @@
 
-<div *ngIf="alarm">
+<div *ngIf="alarm;else loadingTemplate">
     <h1>{{alarm.title}}</h1>
     <p>{{alarm.text}}</p>
+    <p>Alarm status: {{alarm.status}}</p>
     <p>
         Latest response:
-        <br>
-        Id: {{alarmResponse.id}}
-        <br>
-        Time: {{alarmResponse.date | date: 'yyyy-MM-dd HH:mm:ss'}}
-        <br>
-        Status: {{alarmResponse.status}}
-        <br>
-        User ID: {{alarmResponse.userId.id}}
-        <br>
-        Alarm ID: {{alarmResponse.alarmId.id}}
+        {{alarmResponse.date.toDate() | date: 'yyyy-MM-dd HH:mm:ss'}}
     </p>
 </div>
 
-<br>
 <button type="button" id="safeButton" class="rStatusButton" (click)="setStatus(1)">
     I am safe
 </button>
@@ -33,3 +24,10 @@
 <div>
     ---This is a placeholder for the map---
 </div>
+
+<ng-template #loadingTemplate>
+    <hr>
+    <h5>
+        Loading alarm information...
+    </h5>
+</ng-template>
