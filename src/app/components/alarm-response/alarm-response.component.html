@@ -15,21 +15,21 @@
         <br>
         Alarm ID: {{alarmResponse.alarmId.id}}
     </p>
-    <br>
-    <button type="button" id="safeButton" class="rStatusButton" (click)="setStatus(1)">
-        I am safe
-    </button>
-    <br>
-    <button type="button" class="rStatusButton" (click)="setStatus(2)">
-        I need help!
-    </button>
-    <br>
-    <button type="button" class="rStatusButton" (click)="setStatus(3)">
-        I am not at work
-    </button>
-    <br>
-    <div>
-        ---This is a placeholder for the map---
-    </div>
 </div>
 
+<br>
+<button type="button" id="safeButton" class="rStatusButton" (click)="setStatus(1)">
+    I am safe
+</button>
+<br>
+<button type="button" id="unSafeButton" class="rStatusButton" (click)="setStatus(2)">
+    I need help!
+</button>
+<br>
+<button type="button" id="atHomeButton" class="rStatusButton" (click)="setStatus(3)">
+    I am not at work
+</button>
+<br>
+<div>
+    ---This is a placeholder for the map---
+</div>

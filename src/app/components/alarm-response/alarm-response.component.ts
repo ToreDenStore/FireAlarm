@@ -49,6 +49,7 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
       console.log('Alarm Response found: ' + r);
       this.alarmResponse = r;
       this.alarmResponse.id = alarmResponseId;
+      this.setButtonColors(this.alarmResponse.status);
       this.getAlarm();
     });
   }
@@ -56,12 +57,25 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
   /*
     Status can be either 0 = none, 1 = safe, 2 = need help or 3 = away
   */
-  setStatus(status: number) {
-    if (this.alarmResponse.status === status) {
-      // Set to 0, remove current status
-      this.alarmResponseService.setStatus(this.alarmResponse.id, 0);
-    } else {
-      this.alarmResponseService.setStatus(this.alarmResponse.id, status);
+  setStatus(statusButton: number) {
+    let newStatus = statusButton;
+    if (this.alarmResponse.status === statusButton) {
+      newStatus = 0;
+    }
+    this.alarmResponseService.setStatus(this.alarmResponse.id, newStatus);
+    this.setButtonColors(newStatus);
+  }
+
+  setButtonColors(status: number) {
+    document.getElementById('safeButton').style.backgroundColor = '#ffffff';
+    document.getElementById('unSafeButton').style.backgroundColor = '#ffffff';
+    document.getElementById('atHomeButton').style.backgroundColor = '#ffffff';
+    if (status === 1) {
+      document.getElementById('safeButton').style.backgroundColor = '#008000';
+    } else if (status === 2) {
+      document.getElementById('unSafeButton').style.backgroundColor = '#FF0000';
+    } else if (status === 3) {
+      document.getElementById('atHomeButton').style.backgroundColor = '#0000FF';
     }
   }
 
