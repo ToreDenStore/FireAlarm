@@ -1,19 +1,22 @@
 import { AlarmService } from 'src/app/services/alarm.service';
 import { AlarmResponseService } from './../../services/alarm-response.service';
 import { AlarmResponse } from './../../models/alarmResponse';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Alarm } from 'src/app/models/alarm';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-alarm-response',
   templateUrl: './alarm-response.component.html',
   styleUrls: ['./alarm-response.component.css']
 })
-export class AlarmResponseComponent implements OnInit {
+export class AlarmResponseComponent implements OnInit, OnDestroy {
 
   alarmResponse: AlarmResponse;
   alarm: Alarm;
+  alarmResponseSubscription: Subscription;
+  alarmSubscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,9 +29,14 @@ export class AlarmResponseComponent implements OnInit {
     this.getAlarmResponse();
   }
 
+  ngOnDestroy(): void {
+    this.alarmResponseSubscription.unsubscribe();
+    this.alarmSubscription.unsubscribe();
+  }
+
   getAlarm() {
     console.log('alarm id: ' + this.alarmResponse.alarmId.id);
-    this.alarmService.getAlarmById(this.alarmResponse.alarmId.id).subscribe(a => {
+    this.alarmSubscription = this.alarmService.getAlarmById(this.alarmResponse.alarmId.id).subscribe(a => {
       console.log('alarm found: ' + a.title);
       this.alarm = a;
     });
@@ -37,27 +45,13 @@ export class AlarmResponseComponent implements OnInit {
   getAlarmResponse() {
     const alarmResponseId: string = this.route.snapshot.paramMap.get('id');
     console.log('alarm response id: ' + alarmResponseId);
-    this.alarmResponseService.getAlarmResponseByRef(alarmResponseId).subscribe(r => {
+    this.alarmResponseSubscription = this.alarmResponseService.getAlarmResponseByRef(alarmResponseId).subscribe(r => {
       console.log('Alarm Response found: ' + r);
       this.alarmResponse = r;
       this.alarmResponse.id = alarmResponseId;
       this.getAlarm();
     });
   }
-
-  // getAlarmResponse() {
-  //   const userId: string = this.route.snapshot.paramMap.get('userId');
-  //   console.log('user id: ' + userId);
-  //   const alarmId: string = this.route.snapshot.paramMap.get('alarmId');
-  //   console.log('alarm id: ' + alarmId);
-  //   this.alarmResponseService.getAlarmResponses(userId, alarmId).subscribe(r => {
-  //     console.log(r);
-  //     this.alarmResponse = r[0];
-  //     if (r.length > 1) {
-  //       console.log('ERROR! More than one alarm response was returned from query');
-  //     }
-  //   });
-  // }
 
   /*
     Status can be either 0 = none, 1 = safe, 2 = need help or 3 = away

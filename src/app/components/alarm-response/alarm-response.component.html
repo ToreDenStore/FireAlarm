@@ -1,38 +1,35 @@
 
-<!-- <p>
-  alarm-response works!
-</p> -->
-
-<!-- {{alarmResponse | json}} -->
-
-<h1>{{alarm.title}}</h1>
-<p>{{alarm.text}}</p>
-<p>
-    Latest response:
+<div *ngIf="alarm">
+    <h1>{{alarm.title}}</h1>
+    <p>{{alarm.text}}</p>
+    <p>
+        Latest response:
+        <br>
+        Id: {{alarmResponse.id}}
+        <br>
+        Time: {{alarmResponse.date | date: 'yyyy-MM-dd HH:mm:ss'}}
+        <br>
+        Status: {{alarmResponse.status}}
+        <br>
+        User ID: {{alarmResponse.userId.id}}
+        <br>
+        Alarm ID: {{alarmResponse.alarmId.id}}
+    </p>
     <br>
-    Id: {{alarmResponse.id}}
+    <button type="button" id="safeButton" class="rStatusButton" (click)="setStatus(1)">
+        I am safe
+    </button>
     <br>
-    Time: {{alarmResponse.date | date: 'yyyy-MM-dd HH:mm'}}
+    <button type="button" class="rStatusButton" (click)="setStatus(2)">
+        I need help!
+    </button>
     <br>
-    Status: {{alarmResponse.status}}
+    <button type="button" class="rStatusButton" (click)="setStatus(3)">
+        I am not at work
+    </button>
     <br>
-    User ID: {{alarmResponse.userId.id}}
-    <br>
-    Alarm ID: {{alarmResponse.alarmId.id}}
-</p>
-<br>
-<button type="button" (click)="setStatus(1)">
-    I am safe
-</button>
-<br>
-<button type="button" (click)="setStatus(2)">
-    I need help!
-</button>
-<br>
-<button type="button" (click)="setStatus(3)">
-    I am not at the place of risk
-</button>
-<br>
-<div>
-    ---This is a placeholder for the map---
+    <div>
+        ---This is a placeholder for the map---
+    </div>
 </div>
+
