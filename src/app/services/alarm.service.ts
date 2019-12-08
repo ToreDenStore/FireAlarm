@@ -18,7 +18,7 @@ export class AlarmService {
   }
 
   getAlarmById(id: string) {
-    console.log('Service trying to get alarm by path ' + id);
+    console.log('Service trying to get alarm by id ' + id);
     return this.alarmCollection.doc<Alarm>(id).valueChanges();
   }
 
