@@ -1,7 +1,7 @@
 import { AlarmService } from 'src/app/services/alarm.service';
 import { Component, OnInit } from '@angular/core';
 import { Alarm } from 'src/app/models/alarm';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-alarm-new',
@@ -14,10 +14,15 @@ export class AlarmNewComponent implements OnInit {
 
   constructor(
     private alarmService: AlarmService,
-    private modalService: NgbModal
+    public activeModal: NgbActiveModal
   ) { }
 
   ngOnInit() {
+    this.newAlarm = {
+      status: 0,
+      title: '',
+      text: ''
+    };
   }
 
   createNewAlarm() {

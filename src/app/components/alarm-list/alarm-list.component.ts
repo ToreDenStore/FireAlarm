@@ -1,6 +1,8 @@
+import { AlarmNewComponent } from './../alarm-new/alarm-new.component';
 import { Component, OnInit } from '@angular/core';
 import { AlarmService } from 'src/app/services/alarm.service';
 import { Alarm } from 'src/app/models/alarm';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-alarm-list',
@@ -14,8 +16,12 @@ export class AlarmListComponent implements OnInit {
   scheduledAlarms: Alarm[] = [];
   oldAlarms: Alarm[] = [];
   alarmsSearching: boolean;
+  modalRef: NgbModalRef<typeof AlarmNewComponent>;
 
-  constructor(private alarmService: AlarmService) { }
+  constructor(
+    private alarmService: AlarmService,
+    private modalService: NgbModal
+  ) { }
 
   ngOnInit() {
     this.getAlarms();
@@ -33,6 +39,10 @@ export class AlarmListComponent implements OnInit {
 
   deleteAlarm(alarm: Alarm) {
     this.alarmService.delete(alarm);
+  }
+
+  openCreateModal() {
+    this.modalRef = this.modalService.open(AlarmNewComponent);
   }
 
   // updateActiveAlarms() {

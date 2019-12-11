@@ -1,14 +1,24 @@
-<p>
-  alarm-new works!
-</p>
 
-Set new alarm title here
-<br>
-Set new alarm text here
-<br>
-Set scheduled start date here (optional)
-<br>
-<!-- Float center -->
-<button type="submit">Submit</button>
-<!-- Float right -->
-<button type="button">Cancel</button>
+
+<div class="modal-header">
+  <h4 class="modal-title">Hi there!</h4>
+</div>
+<div class="modal-body">
+
+  <div class="input-group mb-3">
+    <input type="text" [(ngModel)]="newAlarm.title" class="form-control" placeholder="Alarm title">
+  </div>
+  <div class="input-group">
+    <textarea [(ngModel)]="newAlarm.text" class="form-control" placeholder="Write the alarm information here"></textarea>
+  </div>
+
+  Set scheduled start date here (optional)
+  <br>
+  <!-- Float center -->
+  <button type="submit">Submit</button>
+  <!-- Float right -->
+  <button type="button">Cancel</button>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>
