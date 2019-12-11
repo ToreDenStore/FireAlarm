@@ -1,4 +1,6 @@
 
+<!-- TODO: Do not show at all if alarm is not active anymore, or not found -->
+
 <div *ngIf="alarm;else loadingTemplate">
     <h1>{{alarm.title}}</h1>
     <p>{{alarm.text}}</p>
