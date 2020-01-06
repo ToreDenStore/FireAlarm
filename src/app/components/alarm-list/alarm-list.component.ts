@@ -31,8 +31,20 @@ export class AlarmListComponent implements OnInit {
     this.alarmsSearching = true;
     this.alarmService.getAlarms().subscribe(alarms => {
       console.log('Found: ' + alarms);
+      this.activeAlarms = [];
+      this.scheduledAlarms = [];
+      this.oldAlarms = [];
+      alarms.forEach(alarm => {
+        if (alarm.status === 2) {
+          this.oldAlarms.push(alarm);
+        } else if (alarm.status === 1) {
+          this.activeAlarms.push(alarm);
+        } else if (alarm.status === 0) {
+          this.scheduledAlarms.push(alarm);
+        }
+      });
       this.alarms = alarms;
-      this.activeAlarms = alarms;
+      // this.activeAlarms = alarms;
       this.alarmsSearching = false;
     });
   }

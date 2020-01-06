@@ -1,7 +1,7 @@
 
 
 <div class="modal-header">
-  <h4 class="modal-title">Hi there!</h4>
+  <h4 class="modal-title">New alarm</h4>
 </div>
 <div class="modal-body">
 
@@ -12,13 +12,10 @@
     <textarea [(ngModel)]="newAlarm.text" class="form-control" placeholder="Write the alarm information here"></textarea>
   </div>
 
-  Set scheduled start date here (optional)
+  Set scheduled start date here (optional, in development)
   <br>
-  <!-- Float center -->
-  <button type="submit">Submit</button>
-  <!-- Float right -->
-  <button type="button">Cancel</button>
 </div>
 <div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="createNewAlarm()">Save</button>
   <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
 </div>
