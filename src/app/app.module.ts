@@ -1,3 +1,4 @@
+import { DemoComponent } from './components/demo/demo.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AlarmNewComponent } from './components/alarm-new/alarm-new.component';
 import { AlarmResponseService } from './services/alarm-response.service';
@@ -25,7 +26,8 @@ import { FormsModule } from '@angular/forms';
       AlarmListComponent,
       AlarmResponseComponent,
       AlarmNewComponent,
-      AdminComponent
+      AdminComponent,
+      DemoComponent
    ],
    imports: [
       BrowserModule,

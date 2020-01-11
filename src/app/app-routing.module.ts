@@ -1,3 +1,4 @@
+import { DemoComponent } from './components/demo/demo.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AlarmComponent } from './components/alarm/alarm.component';
 import { AlarmResponseComponent } from './components/alarm-response/alarm-response.component';
@@ -11,7 +12,8 @@ const routes: Routes = [
   // { path: 'alarms', component: AlarmListComponent },
   { path: 'alarm/:id', component: AlarmComponent },
   // { path: 'users', component: UserComponent },
-  { path: 'response/:id', component: AlarmResponseComponent }
+  { path: 'response/:id', component: AlarmResponseComponent },
+  { path: 'demo', component: DemoComponent },
 ];
 
 @NgModule({
