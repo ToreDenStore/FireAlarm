@@ -1,17 +1,17 @@
 import { Subscription } from 'rxjs';
 import { AlarmResponseService } from './../../services/alarm-response.service';
-import { Component, OnInit } from '@angular/core';
-import { AlarmResponse } from 'src/app/models/alarmResponse';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-demo',
   templateUrl: './demo.component.html',
   styleUrls: ['./demo.component.css']
 })
-export class DemoComponent implements OnInit {
+export class DemoComponent implements OnInit, OnDestroy {
 
+  responseUrlSubscription: Subscription;
   responseJonatanUrls: string[];
-  responseJonatanUrlSubscription: Subscription;
+  responsePavelUrls: string[];
 
   constructor(private alarmResponseService: AlarmResponseService) { }
 
@@ -21,17 +21,23 @@ export class DemoComponent implements OnInit {
   }
 
   getResponses() {
-    this.responseJonatanUrlSubscription = this.alarmResponseService.getAlarmResponses().subscribe(
+    this.responseUrlSubscription = this.alarmResponseService.getAlarmResponses().subscribe(
       r => {
         this.responseJonatanUrls = [];
         r.forEach(response => {
           console.log('Found responses: ' + response.userId.id);
           if (response.userId.id === '1GHCwk3YVa9JJxuH6Bd4') {
             this.responseJonatanUrls.push(response.id);
+          } else if (response.userId.id === 'eXTiHSbQGBZHituQ7l6D') {
+            this.responsePavelUrls.push(response.id);
           }
         });
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    this.responseUrlSubscription.unsubscribe();
   }
 
 }

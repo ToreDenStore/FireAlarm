@@ -5,18 +5,18 @@
   </div>
   
   <div class="demoPhone">
-      <!-- <div *ngIf="alarmsSearching == false;else loadingTemplate">
-        <div *ngIf="activeAlarms.length > 0;else notFoundTemplate"> -->
-          <ul *ngFor="let id of responseJonatanUrls">
-            <li>
-              {{id}}
-            </li>
-          </ul>
-        <!-- </div>
-      </div> -->
+    <ul *ngFor="let id2 of responseJonatanUrls">
+      <li>
+        <app-alarm-response [id] = id2></app-alarm-response>
+      </li>
+    </ul>
   </div>
   
   <div class="demoPhone">
-  
+    <ul *ngFor="let id2 of responsePavelUrls">
+      <li>
+        <app-alarm-response [id] = id2></app-alarm-response>
+      </li>
+    </ul>
   </div>
 </div>
