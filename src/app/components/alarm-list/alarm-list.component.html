@@ -11,7 +11,9 @@
     <div *ngIf="activeAlarms.length > 0;else notFoundTemplate">
       <ul *ngFor="let alarm of activeAlarms">
         <li>
-          <app-alarm [alarm] = alarm></app-alarm>
+          <div id="activeAlarms">
+            <app-alarm [alarm] = alarm></app-alarm>
+          </div>
         </li>
       </ul>
     </div>

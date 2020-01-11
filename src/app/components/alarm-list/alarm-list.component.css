@@ -1,0 +1,6 @@
+#activeAlarms {
+    border-color: red;
+    border-width: 10px;
+    width: 70%;
+    border-style: solid;
+}
