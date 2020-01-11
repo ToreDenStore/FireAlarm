@@ -26,6 +26,19 @@ export class AlarmResponseService {
   //   .valueChanges({ idField: 'id' });
   // }
 
+  getAlarmResponses() {
+    return this.alarmResponsesCollection.valueChanges(
+      { idField: 'id' }
+    );
+  }
+
+  // getAlarmResponsesByUser(userRef: string) {
+  //   console.log('Looking for ' +  '/users/' + userRef);
+  //   return this.afs.collection<AlarmResponse>('alarmResponses',
+  //     ref => ref.where('userId', '==', '/users/' + userRef)
+  //   ).valueChanges();
+  // }
+
   getAlarmResponseByRef(ref: string) {
     // console.log('Service trying to find alarmResponses/' + ref);
     return this.alarmResponsesCollection.doc<AlarmResponse>(ref).valueChanges();
