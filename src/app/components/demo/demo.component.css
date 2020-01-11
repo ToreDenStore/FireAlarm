@@ -1,0 +1,8 @@
+.demoPhone {
+    width: 360px;
+    height: 640px;
+    border-style: solid;
+    float: left;
+    margin: 1em;
+    background-color: white;
+}

@@ -13,6 +13,8 @@ import { Subscription } from 'rxjs';
 })
 export class AlarmResponseComponent implements OnInit, OnDestroy {
 
+  @Input()
+  id: string;
   alarmResponse: AlarmResponse;
   alarm: Alarm;
   alarmResponseSubscription: Subscription;
@@ -43,7 +45,12 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
   }
 
   getAlarmResponse() {
-    const alarmResponseId: string = this.route.snapshot.paramMap.get('id');
+    let alarmResponseId = '';
+    if (this.id) {
+      alarmResponseId = this.id;
+    } else {
+      alarmResponseId = this.route.snapshot.paramMap.get('id');
+    }
     console.log('alarm response id: ' + alarmResponseId);
     this.alarmResponseSubscription = this.alarmResponseService.getAlarmResponseByRef(alarmResponseId).subscribe(r => {
       console.log('Alarm Response found: ' + r);

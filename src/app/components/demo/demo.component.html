@@ -1,0 +1,22 @@
+
+<div style="background-color: black; height: 700px;">
+  <div class="demoPhone">
+    <app-alarm-list></app-alarm-list>
+  </div>
+  
+  <div class="demoPhone">
+    <ul *ngFor="let id2 of responseJonatanUrls">
+      <li>
+        <app-alarm-response [id] = id2></app-alarm-response>
+      </li>
+    </ul>
+  </div>
+  
+  <div class="demoPhone">
+    <ul *ngFor="let id2 of responsePavelUrls">
+      <li>
+        <app-alarm-response [id] = id2></app-alarm-response>
+      </li>
+    </ul>
+  </div>
+</div>
