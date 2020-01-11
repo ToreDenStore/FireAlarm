@@ -7,12 +7,12 @@
 <!-- <p>Status:<br>{{alarm.status}}</p> -->
 
 <br>
-<button type="button" (click)="setStatus(1)">
+<button type="button" (click)="setStatus(1)" *ngIf="alarm.status == 0">
   Start alarm and send out messages
 </button>
 
 <br>
-<button type="button" (click)="setStatus(2)">
+<button type="button" (click)="setStatus(2)" *ngIf="alarm.status == 1">
   Stop and archive alarm
 </button>
 

@@ -27,6 +27,7 @@ export class AlarmNewComponent implements OnInit {
 
   createNewAlarm() {
     this.alarmService.createAlarm(this.newAlarm);
+    this.activeModal.close();
   }
 
 }
