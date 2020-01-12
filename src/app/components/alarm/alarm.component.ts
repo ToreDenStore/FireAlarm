@@ -1,7 +1,12 @@
+import { DocumentReference } from '@angular/fire/firestore';
+import { AlarmResponse } from './../../models/alarmResponse';
+import { User } from './../../models/user';
+import { UserService } from './../../user.service';
+import { AlarmResponseService } from './../../services/alarm-response.service';
+import { AlarmResponseComponent } from './../alarm-response/alarm-response.component';
 import { AlarmService } from './../../services/alarm.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Alarm } from 'src/app/models/alarm';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-alarm',
@@ -14,29 +19,41 @@ export class AlarmComponent implements OnInit {
   alarm: Alarm;
 
   constructor(
-    // private route: ActivatedRoute,
-    // private location: Location,
-    private alarmService: AlarmService
+    private alarmService: AlarmService,
+    private alarmResponseService: AlarmResponseService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
-    // this.getAlarm(this.route.snapshot.paramMap.get('id'));
   }
-
-  // getAlarm(ref: string) {
-  //   this.alarmService.getAlarmByRef(ref).subscribe(a => {
-  //     this.alarm = a;
-  //   });
-  // }
 
   setStatus(status: number) {
     console.log('Setting alarm status to ' + status);
     this.alarm.status = status;
     this.alarmService.setStatus(this.alarm.id, status);
+
+    if (status === 1) {
+      this.createResponseObjects();
+    }
   }
 
   deleteAlarm() {
     this.alarmService.delete(this.alarm);
+  }
+
+  createResponseObjects() {
+    // Find all users
+    let users: User[];
+    const sub = this.userService.getUsers().subscribe(
+      usersFound => {
+        users = usersFound;
+        users.forEach(user => {
+          this.alarmResponseService.createAlarmResponse(user.id, this.alarm.id);
+        });
+        sub.unsubscribe();
+      }
+    );
+
   }
 
   // goBack() {
