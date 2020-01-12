@@ -24,6 +24,7 @@ export class DemoComponent implements OnInit, OnDestroy {
     this.responseUrlSubscription = this.alarmResponseService.getAlarmResponses().subscribe(
       r => {
         this.responseJonatanUrls = [];
+        this.responsePavelUrls = [];
         r.forEach(response => {
           console.log('Found responses: ' + response.userId.id);
           if (response.userId.id === '1GHCwk3YVa9JJxuH6Bd4') {
