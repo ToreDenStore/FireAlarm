@@ -7,9 +7,7 @@ import { User } from './models/user';
 })
 export class UserService {
   usersCollection: AngularFirestoreCollection<User>;
-  // users: Observable<User[]>; // Data is decoupled from the reference of the data
   userDocument: AngularFirestoreDocument<User>;
-  // user: Observable<User>;
 
   constructor(private afs: AngularFirestore) {
     this.usersCollection = this.afs.collection<User>('users', ref => {

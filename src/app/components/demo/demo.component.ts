@@ -16,7 +16,6 @@ export class DemoComponent implements OnInit, OnDestroy {
   constructor(private alarmResponseService: AlarmResponseService) { }
 
   ngOnInit() {
-    //TODO: find all responses given by user id:s for Jonatan and Pavel
     this.getResponses();
   }
 

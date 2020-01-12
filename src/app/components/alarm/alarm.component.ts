@@ -1,9 +1,6 @@
-import { DocumentReference } from '@angular/fire/firestore';
-import { AlarmResponse } from './../../models/alarmResponse';
 import { User } from './../../models/user';
 import { UserService } from './../../user.service';
 import { AlarmResponseService } from './../../services/alarm-response.service';
-import { AlarmResponseComponent } from './../alarm-response/alarm-response.component';
 import { AlarmService } from './../../services/alarm.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Alarm } from 'src/app/models/alarm';
@@ -42,7 +39,6 @@ export class AlarmComponent implements OnInit {
   }
 
   createResponseObjects() {
-    // Find all users
     let users: User[];
     const sub = this.userService.getUsers().subscribe(
       usersFound => {
@@ -55,10 +51,5 @@ export class AlarmComponent implements OnInit {
     );
 
   }
-
-  // goBack() {
-  //   throw new Error('Method not implemented.');
-  //   // this.location.ancestorOrigins
-  // }
 
 }

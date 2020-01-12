@@ -44,7 +44,6 @@ export class AlarmListComponent implements OnInit {
         }
       });
       this.alarms = alarms;
-      // this.activeAlarms = alarms;
       this.alarmsSearching = false;
     });
   }
@@ -56,11 +55,5 @@ export class AlarmListComponent implements OnInit {
   openCreateModal() {
     this.modalRef = this.modalService.open(AlarmNewComponent);
   }
-
-  // updateActiveAlarms() {
-  //   this.activeAlarms = this.alarms.filter(a => {
-  //     return (a.status === 2) && (a.startDate.valueOf() > Date.now());
-  //   });
-  // }
 
 }
