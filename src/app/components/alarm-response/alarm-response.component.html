@@ -11,18 +11,21 @@
     </p>
 </div>
 
-<button [ngClass]="{'rStatusButton': true, 'safeActive': this.alarmResponse.status == 1}" type="button" (click)="setStatus(1)">
-    I am safe
-</button>
-<br>
-<button [ngClass]="{'rStatusButton': true, 'unsafeActive': this.alarmResponse.status == 2}" type="button" (click)="setStatus(2)">
-    I need help!
-</button>
-<br>
-<button [ngClass]="{'rStatusButton': true, 'homeActive': this.alarmResponse.status == 3}" type="button" (click)="setStatus(3)">
-    I am not at work
-</button>
-<br>
+<div *ngIf="alarmResponse;else loadingTemplate">
+    <button [ngClass]="{'rStatusButton': true, 'safeActive': this.alarmResponse.status == 1}" type="button" (click)="setStatus(1)">
+        I am safe
+    </button>
+    <br>
+    <button [ngClass]="{'rStatusButton': true, 'unsafeActive': this.alarmResponse.status == 2}" type="button" (click)="setStatus(2)">
+        I need help!
+    </button>
+    <br>
+    <button [ngClass]="{'rStatusButton': true, 'homeActive': this.alarmResponse.status == 3}" type="button" (click)="setStatus(3)">
+        I am not at work
+    </button>
+    <br>
+</div>
+
 <div>
     ---This is a placeholder for the map---
 </div>
@@ -30,6 +33,6 @@
 <ng-template #loadingTemplate>
     <hr>
     <h5>
-        Loading alarm information...
+        Loading...
     </h5>
 </ng-template>
