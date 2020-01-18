@@ -8,12 +8,15 @@
 
 .safeActive {
     background-color: green;
+    font-weight: bold;
 }
 
 .unsafeActive {
     background-color: red;
+    font-weight: bold;
 }
 
 .homeActive {
-    background-color: blue;
+    background-color: rgb(199, 122, 206);
+    font-weight: bold;
 }
