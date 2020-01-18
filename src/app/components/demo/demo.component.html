@@ -5,18 +5,14 @@
   </div>
   
   <div class="demoPhone">
-    <ul *ngFor="let id2 of responseJonatanUrls">
-      <li>
-        <app-alarm-response [id] = id2></app-alarm-response>
-      </li>
-    </ul>
+    <ng-container *ngFor="let id of responseJonatanUrls">
+      <app-alarm-response [id] = id></app-alarm-response>
+    </ng-container>
   </div>
   
   <div class="demoPhone">
-    <ul *ngFor="let id2 of responsePavelUrls">
-      <li>
-        <app-alarm-response [id] = id2></app-alarm-response>
-      </li>
-    </ul>
+    <ng-container *ngFor="let id of responsePavelUrls">
+      <app-alarm-response [id] = id></app-alarm-response>
+    </ng-container>
   </div>
 </div>

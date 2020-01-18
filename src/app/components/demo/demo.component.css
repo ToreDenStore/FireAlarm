@@ -5,5 +5,5 @@
     float: left;
     margin: 1em;
     background-color: white;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
