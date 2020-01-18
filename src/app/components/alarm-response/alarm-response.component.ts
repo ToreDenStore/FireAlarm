@@ -1,3 +1,5 @@
+import { User } from './../../models/user';
+import { UserService } from './../../user.service';
 import { AlarmService } from 'src/app/services/alarm.service';
 import { AlarmResponseService } from './../../services/alarm-response.service';
 import { AlarmResponse } from './../../models/alarmResponse';
@@ -16,14 +18,17 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
   @Input()
   id: string;
   alarmResponse: AlarmResponse;
+  teamResponses: AlarmResponse[];
   alarm: Alarm;
   alarmResponseSubscription: Subscription;
   alarmSubscription: Subscription;
+  teamResponseSubscriptions: Subscription[];
 
   constructor(
     private route: ActivatedRoute,
     private alarmResponseService: AlarmResponseService,
-    private alarmService: AlarmService
+    private alarmService: AlarmService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -47,9 +52,11 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
   getAlarmResponse() {
     let alarmResponseId = '';
     if (this.id) {
+      // For demo view only
       alarmResponseId = this.id;
     } else {
       alarmResponseId = this.route.snapshot.paramMap.get('id');
+      this.id = alarmResponseId;
     }
     console.log('alarm response id: ' + alarmResponseId);
     this.alarmResponseSubscription = this.alarmResponseService.getAlarmResponseById(alarmResponseId).subscribe(r => {
@@ -57,7 +64,47 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
       this.alarmResponse = r;
       this.alarmResponse.id = alarmResponseId;
       this.getAlarm();
+      this.getTeamResponses();
     });
+  }
+
+  getTeamResponses() {
+    console.log('Looking for team responses based on user: ' + this.alarmResponse.userRef.id);
+    let team: User[] = [];
+    this.userService.getTeam(this.alarmResponse.userRef)
+    .then(r => {
+      const sub = r.subscribe(team2 => {
+        team = team2;
+        sub.unsubscribe();
+        console.log('Team found, team size: ' + team2.length);
+        console.log('User 1 of team: ' + team2[0].id);
+
+        console.log('Team size for responses: ' + team.length);
+        this.teamResponses = [];
+        this.teamResponseSubscriptions = [];
+        team.forEach(teamMember => {
+          this.teamResponseSubscriptions.push(
+            this.alarmResponseService.getAlarmResponseByUserAndAlarm(teamMember.id, this.alarm.id).subscribe(response => {
+              this.teamResponses.push(response[0]);
+              console.log('Found team response; ' + response[0]);
+            })
+          );
+        });
+      });
+    });
+    // .finally(() => {
+    //   console.log('Team size for responses: ' + team.length);
+    //   this.teamResponses = [];
+    //   this.teamResponseSubscriptions = [];
+    //   team.forEach(teamMember => {
+    //     this.teamResponseSubscriptions.push(
+    //       this.alarmResponseService.getAlarmResponseByUserAndAlarm(teamMember.id, this.alarm.id).subscribe(response => {
+    //         this.teamResponses.push(response[0]);
+    //         console.log("Found team response; " + response[0]);
+    //       })
+    //     );
+    //   });
+    // });
   }
 
   /*

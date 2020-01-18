@@ -5,15 +5,15 @@ import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/fire
 import * as firebase from 'firebase/app';
 import Timestamp = firebase.firestore.Timestamp;
 import { Alarm } from '../models/alarm';
+import { UserService } from '../user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlarmResponseService {
-
   alarmResponsesCollection: AngularFirestoreCollection<AlarmResponse>;
 
-  constructor(private afs: AngularFirestore) {
+  constructor(private afs: AngularFirestore, private userService: UserService) {
     this.alarmResponsesCollection = this.afs.collection<AlarmResponse>('alarmResponses');
   }
 
@@ -35,6 +35,14 @@ export class AlarmResponseService {
 
   getAlarmResponseById(ref: string) {
     return this.alarmResponsesCollection.doc<AlarmResponse>(ref).valueChanges();
+  }
+
+  getAlarmResponseByUserAndAlarm(userId: string, alarmId: string) {
+    return this.afs.collection<AlarmResponse>('alarmResponses', ref => {
+      return ref
+        .where('userRef', '==', this.afs.collection<User>('users').doc<User>(userId).ref)
+        .where('alarmRef', '==', this.afs.collection<Alarm>('alarms').doc<Alarm>(alarmId).ref);
+    }).valueChanges();
   }
 
   setStatus(ref: string, newStatus: number) {

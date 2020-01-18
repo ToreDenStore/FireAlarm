@@ -29,4 +29,17 @@ export class UserService {
     }).valueChanges();
   }
 
+  async getTeam(userRef: firebase.firestore.DocumentReference) {
+    const r = await userRef.get();
+    const managerSID = r.get('manager');
+    console.log('Manager of user is ' + managerSID);
+    return this.getTeamByManagerSID(managerSID);
+  }
+
+  getTeamByManagerSID(managerSID: string) {
+    return this.afs.collection<User>('users', ref => {
+      return ref.where('manager', '==', managerSID);
+    }).valueChanges({ idField: 'id' });
+  }
+
 }
