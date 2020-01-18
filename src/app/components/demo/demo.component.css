@@ -1,9 +1,17 @@
 .demoPhone {
-    width: 360px;
+    /* width: 360px; */
     height: 640px;
     border-style: solid;
-    float: left;
-    margin: 1em;
     background-color: white;
     overflow-y: auto;
+}
+
+.demoPhoneCase {
+    background-color: black;
+    border-radius: 25px;
+    width: 400px;
+    height: 680px;
+    float: left;
+    padding: 20px;
+    margin: 2px;
 }
