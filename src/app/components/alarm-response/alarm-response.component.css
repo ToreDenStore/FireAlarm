@@ -19,3 +19,15 @@
 #atHomeButton {
     border-color: blue;
 }
+
+.safeActive {
+    background-color: green;
+}
+
+.unsafeActive {
+    background-color: red;
+}
+
+.homeActive {
+    background-color: blue;
+}
