@@ -19,8 +19,8 @@ export class AlarmResponseService {
 
   createAlarmResponse(userId: string, alarmId: string) {
     const newAlarmResponse: AlarmResponse = {
-      userId: this.afs.collection<User>('users').doc<User>(userId).ref,
-      alarmId: this.afs.collection<Alarm>('alarms').doc<Alarm>(alarmId).ref,
+      userRef: this.afs.collection<User>('users').doc<User>(userId).ref,
+      alarmRef: this.afs.collection<Alarm>('alarms').doc<Alarm>(alarmId).ref,
       status: 0,
       date: firebase.firestore.Timestamp.fromDate(new Date())
     };
@@ -33,7 +33,7 @@ export class AlarmResponseService {
     );
   }
 
-  getAlarmResponseByRef(ref: string) {
+  getAlarmResponseById(ref: string) {
     return this.alarmResponsesCollection.doc<AlarmResponse>(ref).valueChanges();
   }
 

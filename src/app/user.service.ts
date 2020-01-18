@@ -19,7 +19,7 @@ export class UserService {
     return this.usersCollection.valueChanges({ idField: 'id' });
   }
 
-  getUserByRef(ref: string) {
+  getUserById(ref: string) {
     return this.afs.doc<User>('users/' + ref).valueChanges();
   }
 

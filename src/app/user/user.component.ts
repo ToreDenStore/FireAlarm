@@ -44,7 +44,7 @@ export class UserComponent implements OnInit {
 
   getUserByRef(ref: string) {
     this.userByRefSearching = true;
-    this.userService.getUserByRef(ref).subscribe(user => {
+    this.userService.getUserById(ref).subscribe(user => {
       this.userByRef = user;
       this.userByRefSearching = false;
     });

@@ -37,8 +37,8 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
   }
 
   getAlarm() {
-    console.log('alarm id: ' + this.alarmResponse.alarmId.id);
-    this.alarmSubscription = this.alarmService.getAlarmById(this.alarmResponse.alarmId.id).subscribe(a => {
+    console.log('Looking for alarm id: ' + this.alarmResponse.alarmRef.id);
+    this.alarmSubscription = this.alarmService.getAlarmById(this.alarmResponse.alarmRef.id).subscribe(a => {
       console.log('alarm found: ' + a.title);
       this.alarm = a;
     });
@@ -52,8 +52,8 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
       alarmResponseId = this.route.snapshot.paramMap.get('id');
     }
     console.log('alarm response id: ' + alarmResponseId);
-    this.alarmResponseSubscription = this.alarmResponseService.getAlarmResponseByRef(alarmResponseId).subscribe(r => {
-      console.log('Alarm Response found: ' + r);
+    this.alarmResponseSubscription = this.alarmResponseService.getAlarmResponseById(alarmResponseId).subscribe(r => {
+      console.log('Alarm Response found for user: ' + r.userRef.id);
       this.alarmResponse = r;
       this.alarmResponse.id = alarmResponseId;
       this.getAlarm();
