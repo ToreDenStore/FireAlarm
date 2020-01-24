@@ -7,6 +7,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Alarm } from 'src/app/models/alarm';
 import { Subscription } from 'rxjs';
+import { DocumentReference } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-alarm-response',
@@ -52,38 +53,39 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
     console.log('alarm response id: ' + this.id);
     this.alarmResponseSubscription = this.alarmResponseService.getAlarmResponseById(this.id).subscribe(r => {
       console.log('Alarm Response found for user: ' + r.userRef.id);
+      if (!this.alarmResponse || this.alarmResponse.alarmRef.id !== r.alarmRef.id) {
+        this.getAlarm(r.alarmRef);
+      }
+      if (!this.alarmResponse || this.alarmResponse.userRef.id !== r.userRef.id || this.alarmResponse.alarmRef.id !== r.alarmRef.id) {
+        this.getTeamResponses(r.alarmRef, r.userRef);
+      }
       this.alarmResponse = r;
       this.alarmResponse.id = this.id;
-      this.getAlarm();
-      this.getTeamResponses();
     });
   }
 
-  getAlarm() {
-    console.log('Looking for alarm id: ' + this.alarmResponse.alarmRef.id);
-    this.alarmSubscription = this.alarmService.getAlarmById(this.alarmResponse.alarmRef.id).subscribe(a => {
+  getAlarm(alarmRef: DocumentReference) {
+    console.log('Looking for alarm id: ' + alarmRef.id);
+    this.alarmSubscription = this.alarmService.getAlarmById(alarmRef.id).subscribe(a => {
       console.log('alarm found: ' + a.title);
       this.alarm = a;
     });
   }
 
-  getTeamResponses() {
-    console.log('Looking for team responses based on user: ' + this.alarmResponse.userRef.id);
-    let team: User[] = [];
-    this.userService.getTeam(this.alarmResponse.userRef)
+  getTeamResponses(alarmRef: DocumentReference, userRef: DocumentReference) {
+    console.log('Looking for team responses based on user: ' + userRef.id);
+    this.userService.getTeam(userRef)
     .then(r => {
       const sub = r.subscribe(team2 => {
-        team = team2;
+        const team: User[] = team2;
         sub.unsubscribe();
-        console.log('Team found, team size: ' + team2.length);
-        console.log('User 1 of team: ' + team2[0].id);
-
+        console.log('User 1 of team: ' + team[0].id);
         console.log('Team size for responses: ' + team.length);
         this.teamResponses = [];
         this.teamResponseSubscriptions = [];
         team.forEach(teamMember => {
           this.teamResponseSubscriptions.push(
-            this.alarmResponseService.getAlarmResponseByUserAndAlarm(teamMember.id, this.alarmResponse.alarmRef.id).subscribe(response => {
+            this.alarmResponseService.getAlarmResponseByUserAndAlarm(teamMember.id, alarmRef.id).subscribe(response => {
               this.teamResponses.push(response[0]);
               console.log('Found team response; ' + response[0]);
             })

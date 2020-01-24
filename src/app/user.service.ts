@@ -31,8 +31,8 @@ export class UserService {
 
   async getTeam(userRef: firebase.firestore.DocumentReference) {
     const r = await userRef.get();
-    const managerSID = r.get('manager');
-    console.log('Manager of user is ' + managerSID);
+    const managerSID = await r.get('manager');
+    console.log('User service found manager ' + managerSID + ' for user ' + r.id);
     return this.getTeamByManagerSID(managerSID);
   }
 
