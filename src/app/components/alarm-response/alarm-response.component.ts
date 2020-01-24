@@ -32,13 +32,31 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    console.log('Initializing alarmResponse component');
+    if (!this.id) {
+      this.id = this.route.snapshot.paramMap.get('id');
+    }
+    console.log('Initializing alarmResponse component ' + this.id);
     this.getAlarmResponse();
   }
 
   ngOnDestroy(): void {
+    console.log('Destroying alarmResponse component ' + this.id);
     this.alarmResponseSubscription.unsubscribe();
     this.alarmSubscription.unsubscribe();
+    this.teamResponseSubscriptions.forEach(sub => {
+      sub.unsubscribe();
+    });
+  }
+
+  getAlarmResponse() {
+    console.log('alarm response id: ' + this.id);
+    this.alarmResponseSubscription = this.alarmResponseService.getAlarmResponseById(this.id).subscribe(r => {
+      console.log('Alarm Response found for user: ' + r.userRef.id);
+      this.alarmResponse = r;
+      this.alarmResponse.id = this.id;
+      this.getAlarm();
+      this.getTeamResponses();
+    });
   }
 
   getAlarm() {
@@ -46,25 +64,6 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
     this.alarmSubscription = this.alarmService.getAlarmById(this.alarmResponse.alarmRef.id).subscribe(a => {
       console.log('alarm found: ' + a.title);
       this.alarm = a;
-    });
-  }
-
-  getAlarmResponse() {
-    let alarmResponseId = '';
-    if (this.id) {
-      // For demo view only
-      alarmResponseId = this.id;
-    } else {
-      alarmResponseId = this.route.snapshot.paramMap.get('id');
-      this.id = alarmResponseId;
-    }
-    console.log('alarm response id: ' + alarmResponseId);
-    this.alarmResponseSubscription = this.alarmResponseService.getAlarmResponseById(alarmResponseId).subscribe(r => {
-      console.log('Alarm Response found for user: ' + r.userRef.id);
-      this.alarmResponse = r;
-      this.alarmResponse.id = alarmResponseId;
-      this.getAlarm();
-      this.getTeamResponses();
     });
   }
 
@@ -84,7 +83,7 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
         this.teamResponseSubscriptions = [];
         team.forEach(teamMember => {
           this.teamResponseSubscriptions.push(
-            this.alarmResponseService.getAlarmResponseByUserAndAlarm(teamMember.id, this.alarm.id).subscribe(response => {
+            this.alarmResponseService.getAlarmResponseByUserAndAlarm(teamMember.id, this.alarmResponse.alarmRef.id).subscribe(response => {
               this.teamResponses.push(response[0]);
               console.log('Found team response; ' + response[0]);
             })

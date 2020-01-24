@@ -38,6 +38,7 @@ export class AlarmResponseService {
   }
 
   getAlarmResponseByUserAndAlarm(userId: string, alarmId: string) {
+    console.log('Service trying to get alarm response from user ' + userId + ' and alarm ' + alarmId);
     return this.afs.collection<AlarmResponse>('alarmResponses', ref => {
       return ref
         .where('userRef', '==', this.afs.collection<User>('users').doc<User>(userId).ref)
