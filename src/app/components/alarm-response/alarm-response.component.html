@@ -29,6 +29,16 @@
     <br>
 </div>
 
+<div class="listDiv">
+    Team responses:
+    <div *ngIf="teamResponses.size > 0">
+        <ng-container *ngFor="let response of teamResponses | keyvalue">
+            {{response.value.id}}: {{response.value.status}}
+            <hr>
+        </ng-container>
+    </div>
+  </div>
+
 <div>
     ---This is a placeholder for the map---
 </div>

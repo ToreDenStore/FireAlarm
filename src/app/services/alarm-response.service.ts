@@ -43,11 +43,11 @@ export class AlarmResponseService {
       return ref
         .where('userRef', '==', this.afs.collection<User>('users').doc<User>(userId).ref)
         .where('alarmRef', '==', this.afs.collection<Alarm>('alarms').doc<Alarm>(alarmId).ref);
-    }).valueChanges();
+    }).valueChanges({ idField: 'id' });
   }
 
-  setStatus(ref: string, newStatus: number) {
-    return this.alarmResponsesCollection.doc<AlarmResponse>(ref).update(
+  setStatus(responseId: string, newStatus: number) {
+    return this.alarmResponsesCollection.doc<AlarmResponse>(responseId).update(
       {
         status: newStatus,
         date: Timestamp.fromDate(new Date())

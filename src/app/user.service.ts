@@ -19,8 +19,8 @@ export class UserService {
     return this.usersCollection.valueChanges({ idField: 'id' });
   }
 
-  getUserById(ref: string) {
-    return this.afs.doc<User>('users/' + ref).valueChanges();
+  getUserById(id: string) {
+    return this.afs.doc<User>('users/' + id).valueChanges();
   }
 
   getUsersBySID(sid: string) {

@@ -19,7 +19,7 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
   @Input()
   id: string;
   alarmResponse: AlarmResponse;
-  teamResponses: AlarmResponse[];
+  teamResponses: Map<string, AlarmResponse>;
   alarm: Alarm;
   alarmResponseSubscription: Subscription;
   alarmSubscription: Subscription;
@@ -33,6 +33,7 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.teamResponses = new Map();
     if (!this.id) {
       this.id = this.route.snapshot.paramMap.get('id');
     }
@@ -54,9 +55,11 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
     this.alarmResponseSubscription = this.alarmResponseService.getAlarmResponseById(this.id).subscribe(r => {
       console.log('Alarm Response found for user: ' + r.userRef.id);
       if (!this.alarmResponse || this.alarmResponse.alarmRef.id !== r.alarmRef.id) {
+        console.log('Looking for alarm');
         this.getAlarm(r.alarmRef);
       }
       if (!this.alarmResponse || this.alarmResponse.userRef.id !== r.userRef.id || this.alarmResponse.alarmRef.id !== r.alarmRef.id) {
+        console.log('Looking for team responses');
         this.getTeamResponses(r.alarmRef, r.userRef);
       }
       this.alarmResponse = r;
@@ -81,31 +84,19 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
         sub.unsubscribe();
         console.log('User 1 of team: ' + team[0].id);
         console.log('Team size for responses: ' + team.length);
-        this.teamResponses = [];
+        this.teamResponses.clear();
         this.teamResponseSubscriptions = [];
         team.forEach(teamMember => {
           this.teamResponseSubscriptions.push(
-            this.alarmResponseService.getAlarmResponseByUserAndAlarm(teamMember.id, alarmRef.id).subscribe(response => {
-              this.teamResponses.push(response[0]);
-              console.log('Found team response; ' + response[0]);
+            this.alarmResponseService.getAlarmResponseByUserAndAlarm(teamMember.id, alarmRef.id).subscribe(responses => {
+              const response = responses[0];
+              this.teamResponses.set(response.id, response);
+              console.log('Found team member response; ' + response.id);
             })
           );
         });
       });
     });
-    // .finally(() => {
-    //   console.log('Team size for responses: ' + team.length);
-    //   this.teamResponses = [];
-    //   this.teamResponseSubscriptions = [];
-    //   team.forEach(teamMember => {
-    //     this.teamResponseSubscriptions.push(
-    //       this.alarmResponseService.getAlarmResponseByUserAndAlarm(teamMember.id, this.alarm.id).subscribe(response => {
-    //         this.teamResponses.push(response[0]);
-    //         console.log("Found team response; " + response[0]);
-    //       })
-    //     );
-    //   });
-    // });
   }
 
   /*
