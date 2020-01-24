@@ -50,7 +50,7 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
   }
 
   getAlarmResponse() {
-    console.log('alarm response id: ' + this.id);
+    console.log('Looking for alarm response id: ' + this.id);
     this.alarmResponseSubscription = this.alarmResponseService.getAlarmResponseById(this.id).subscribe(r => {
       console.log('Alarm Response found for user: ' + r.userRef.id);
       if (!this.alarmResponse || this.alarmResponse.alarmRef.id !== r.alarmRef.id) {
