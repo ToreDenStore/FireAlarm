@@ -18,12 +18,14 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
 
   @Input()
   id: string;
+
   alarmResponse: AlarmResponse;
-  teamResponses: Map<string, AlarmResponse>;
+  user: User;
   alarm: Alarm;
+
   alarmResponseSubscription: Subscription;
+  userSubscription: Subscription;
   alarmSubscription: Subscription;
-  teamResponseSubscriptions: Subscription[];
 
   constructor(
     private route: ActivatedRoute,
@@ -33,7 +35,7 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.teamResponses = new Map();
+    // this.teamResponses = new Map();
     if (!this.id) {
       this.id = this.route.snapshot.paramMap.get('id');
     }
@@ -45,22 +47,20 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
     console.log('Destroying alarmResponse component ' + this.id);
     this.alarmResponseSubscription.unsubscribe();
     this.alarmSubscription.unsubscribe();
-    this.teamResponseSubscriptions.forEach(sub => {
-      sub.unsubscribe();
-    });
+    // this.teamResponseSubscriptions.forEach(sub => {
+    //   sub.unsubscribe();
+    // });
   }
 
   getAlarmResponse() {
     console.log('Looking for alarm response id: ' + this.id);
     this.alarmResponseSubscription = this.alarmResponseService.getAlarmResponseById(this.id).subscribe(r => {
       console.log('Alarm Response found for user: ' + r.userRef.id);
-      if (!this.alarmResponse || this.alarmResponse.alarmRef.id !== r.alarmRef.id) {
-        console.log('Looking for alarm');
+      if (!this.alarm || this.alarmResponse.alarmRef.id !== r.alarmRef.id) {
         this.getAlarm(r.alarmRef);
       }
-      if (!this.alarmResponse || this.alarmResponse.userRef.id !== r.userRef.id || this.alarmResponse.alarmRef.id !== r.alarmRef.id) {
-        console.log('Looking for team responses');
-        this.getTeamResponses(r.alarmRef, r.userRef);
+      if (!this.user || this.alarmResponse.userRef.id !== r.userRef.id) {
+        this.getUser(r.userRef);
       }
       this.alarmResponse = r;
       this.alarmResponse.id = this.id;
@@ -68,34 +68,20 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
   }
 
   getAlarm(alarmRef: DocumentReference) {
-    console.log('Looking for alarm id: ' + alarmRef.id);
+    console.log('Looking for alarm: ' + alarmRef.id);
     this.alarmSubscription = this.alarmService.getAlarmById(alarmRef.id).subscribe(a => {
-      console.log('alarm found: ' + a.title);
+      console.log('Alarm found: ' + a.text);
       this.alarm = a;
+      this.alarm.id = alarmRef.id;
     });
   }
 
-  getTeamResponses(alarmRef: DocumentReference, userRef: DocumentReference) {
-    console.log('Looking for team responses based on user: ' + userRef.id);
-    this.userService.getTeam(userRef)
-    .then(r => {
-      const sub = r.subscribe(team2 => {
-        const team: User[] = team2;
-        sub.unsubscribe();
-        console.log('User 1 of team: ' + team[0].id);
-        console.log('Team size for responses: ' + team.length);
-        this.teamResponses.clear();
-        this.teamResponseSubscriptions = [];
-        team.forEach(teamMember => {
-          this.teamResponseSubscriptions.push(
-            this.alarmResponseService.getAlarmResponseByUserAndAlarm(teamMember.id, alarmRef.id).subscribe(responses => {
-              const response = responses[0];
-              this.teamResponses.set(response.id, response);
-              console.log('Found team member response; ' + response.id);
-            })
-          );
-        });
-      });
+  getUser(userRef: DocumentReference) {
+    console.log('Looking for user ' + userRef.id);
+    this.userSubscription = this.userService.getUserById(userRef.id).subscribe(u => {
+      console.log('User found: ' + u.name);
+      this.user = u;
+      this.user.id = userRef.id;
     });
   }
 

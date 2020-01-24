@@ -1,3 +1,4 @@
+import { TeamComponent } from './components/team/team.component';
 import { DemoComponent } from './components/demo/demo.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AlarmNewComponent } from './components/alarm-new/alarm-new.component';
@@ -27,7 +28,8 @@ import { FormsModule } from '@angular/forms';
       AlarmResponseComponent,
       AlarmNewComponent,
       AdminComponent,
-      DemoComponent
+      DemoComponent,
+      TeamComponent
    ],
    imports: [
       BrowserModule,

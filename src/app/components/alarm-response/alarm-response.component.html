@@ -1,6 +1,10 @@
 
 <!-- TODO: Do not show at all if alarm is not active anymore, or not found -->
 
+<div *ngIf="user;else loadingTemplate">
+    <h2>{{user.name}}!</h2>
+</div>
+
 <div *ngIf="alarm;else loadingTemplate">
     <h1>{{alarm.title}}</h1>
     <p>{{alarm.text}}</p>
@@ -24,20 +28,14 @@
     <br>
     <button [ngClass]="{'rStatusButton': true, 'homeActive': this.alarmResponse.status == 3}" type="button" (click)="setStatus(3)">
         <i class="fas fa-home fa-3x" style="color: purple;"></i>
-        <div>I am not at work</div>
+        <div>I am not at the office/school</div>
     </button>
     <br>
 </div>
 
-<div class="listDiv">
-    Team responses:
-    <div *ngIf="teamResponses.size > 0">
-        <ng-container *ngFor="let response of teamResponses | keyvalue">
-            {{response.value.id}}: {{response.value.status}}
-            <hr>
-        </ng-container>
-    </div>
-  </div>
+<div *ngIf="alarm && user;else loadingTemplate">
+    <app-team [alarmId]=alarm.id [managerSID]=user.manager ></app-team>
+</div>
 
 <div>
     ---This is a placeholder for the map---
