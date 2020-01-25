@@ -20,6 +20,9 @@ export class DemoComponent implements OnInit, OnDestroy {
   }
 
   getResponses() {
+    if (this.responseUrlSubscription) {
+      this.responseUrlSubscription.unsubscribe();
+    }
     this.responseUrlSubscription = this.alarmResponseService.getAlarmResponses().subscribe(
       r => {
         this.responseJonatanUrls = [];

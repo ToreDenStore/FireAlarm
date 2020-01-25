@@ -1,47 +1,55 @@
 
 <!-- TODO: Do not show at all if alarm is not active anymore, or not found -->
 
-<div *ngIf="user;else loadingTemplate">
-    <h2>{{user.name}}!</h2>
-</div>
-
 <div *ngIf="alarm;else loadingTemplate">
-    <h1>{{alarm.title}}</h1>
-    <p>{{alarm.text}}</p>
-    <p>Alarm status: {{alarm.status}}</p>
-    <p>
-        Latest response:
-        {{alarmResponse.date.toDate() | date: 'yyyy-MM-dd HH:mm:ss'}}
-    </p>
-</div>
 
-<div *ngIf="alarmResponse;else loadingTemplate">
-    <button [ngClass]="{'rStatusButton': true, 'unActive': true, 'safeActive': this.alarmResponse.status == 1}"
-    type="button" (click)="setStatus(1)">
-        <i [ngClass]="{'fas fa-check-circle fa-3x': true, 'safeColor': true}"></i>
-        <div>I am safe</div>
-    </button>
-    <br>
-    <button [ngClass]="{'rStatusButton': true, 'unActive': true, 'unsafeActive': this.alarmResponse.status == 2}"
-    type="button" (click)="setStatus(2)">
-        <i [ngClass]="{'fas fa-exclamation-triangle fa-3x': true, 'unsafeColor': true}"></i>
-        <div>I need help!</div>
-    </button>
-    <br>
-    <button [ngClass]="{'rStatusButton': true, 'unActive': true, 'homeActive': this.alarmResponse.status == 3}"
-    type="button" (click)="setStatus(3)">
-        <i [ngClass]="{'fas fa-home fa-3x': true, 'homeColor': true}"></i>
-        <div>I am not at the office/school</div>
-    </button>
-    <br>
-</div>
+    <div *ngIf="user;else loadingTemplate">
+        <h2>{{user.name}}!</h2>
+    </div>
 
-<div *ngIf="alarm && user;else loadingTemplate">
-    <app-team [alarmId]=alarm.id [managerSID]=user.manager ></app-team>
-</div>
+    <div *ngIf="alarm;else loadingTemplate">
+        <h1>{{alarm.title}}</h1>
+        <p>{{alarm.text}}</p>
+        <!-- <p>
+            Latest response:
+            {{alarmResponse.date.toDate() | date: 'yyyy-MM-dd HH:mm:ss'}}
+        </p> -->
+    </div>
 
-<div>
-    ---This is a placeholder for the map---
+    <div *ngIf="alarm.status==1">    
+        <div *ngIf="alarmResponse;else loadingTemplate">
+            <button [ngClass]="{'rStatusButton': true, 'unActive': true, 'safeActive': this.alarmResponse.status == 1}"
+            type="button" (click)="setStatus(1)">
+                <i [ngClass]="{'fas fa-check-circle fa-3x': true, 'safeColor': true}"></i>
+                <div>I am safe</div>
+            </button>
+            <br>
+            <button [ngClass]="{'rStatusButton': true, 'unActive': true, 'unsafeActive': this.alarmResponse.status == 2}"
+            type="button" (click)="setStatus(2)">
+                <i [ngClass]="{'fas fa-exclamation-triangle fa-3x': true, 'unsafeColor': true}"></i>
+                <div>I need help!</div>
+            </button>
+            <br>
+            <button [ngClass]="{'rStatusButton': true, 'unActive': true, 'homeActive': this.alarmResponse.status == 3}"
+            type="button" (click)="setStatus(3)">
+                <i [ngClass]="{'fas fa-home fa-3x': true, 'homeColor': true}"></i>
+                <div>I am not at the office/school</div>
+            </button>
+            <br>
+        </div>
+        
+        <div *ngIf="alarm && user;else loadingTemplate">
+            <app-team [alarmId]=alarm.id [managerSID]=user.manager ></app-team>
+        </div>
+        
+        <div>
+            ---This is a placeholder for the map---
+        </div>
+    </div>
+
+    <div *ngIf="alarm.status==2">
+        This alarm is not active anymore
+    </div>
 </div>
 
 <ng-template #loadingTemplate>

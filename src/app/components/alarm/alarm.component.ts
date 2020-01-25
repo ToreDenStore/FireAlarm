@@ -42,6 +42,7 @@ export class AlarmComponent implements OnInit {
     let users: User[];
     const sub = this.userService.getUsers().subscribe(
       usersFound => {
+        console.log('Alarm component creating response objects');
         users = usersFound;
         users.forEach(user => {
           this.alarmResponseService.createAlarmResponse(user.id, this.alarm.id);
@@ -49,7 +50,6 @@ export class AlarmComponent implements OnInit {
         sub.unsubscribe();
       }
     );
-
   }
 
 }
