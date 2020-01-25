@@ -16,7 +16,7 @@ export class AlarmListComponent implements OnInit {
   scheduledAlarms: Alarm[] = [];
   oldAlarms: Alarm[] = [];
   alarmsSearching: boolean;
-  modalRef: NgbModalRef<typeof AlarmNewComponent>;
+  modalRef: NgbModalRef;
 
   constructor(
     private alarmService: AlarmService,
