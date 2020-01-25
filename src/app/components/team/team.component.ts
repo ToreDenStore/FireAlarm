@@ -61,7 +61,7 @@ export class TeamComponent implements OnInit, OnDestroy, OnChanges {
 
   getTeamResponses() {
     console.log('Creating team response subscriptions');
-    this.teamResponses.clear();
+    this.teamResponses.clear(); // Should not be needed, is a workaround due to a bug
     if (this.teamResponseSubscriptions) {
       this.teamResponseSubscriptions.forEach(sub => {
         sub.unsubscribe();

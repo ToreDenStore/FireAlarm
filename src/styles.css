@@ -29,6 +29,10 @@
     color: purple;
 }
 
+.unActiveColor {
+    color: gray;
+}
+
 .safeActive {
     background-color: green;
     font-weight: bold;
