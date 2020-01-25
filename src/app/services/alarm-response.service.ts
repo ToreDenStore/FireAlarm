@@ -33,6 +33,16 @@ export class AlarmResponseService {
     );
   }
 
+  getAlarmResponseByAlarm(alarmId: string) {
+    return this.afs.collection<AlarmResponse>('alarmResponses', ref => {
+      return ref.where('alarmRef', '==', this.afs.collection<Alarm>('alarms').doc<Alarm>(alarmId).ref);
+    }).valueChanges({ idField: 'id' });
+  }
+
+  deleteResponse(alarmResponseId: string) {
+    this.alarmResponsesCollection.doc(alarmResponseId).delete();
+  }
+
   getAlarmResponseById(ref: string) {
     return this.alarmResponsesCollection.doc<AlarmResponse>(ref).valueChanges();
   }

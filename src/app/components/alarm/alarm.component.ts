@@ -35,7 +35,15 @@ export class AlarmComponent implements OnInit {
   }
 
   deleteAlarm() {
+    console.log('Deleting alarm ' + this.alarm.id);
     this.alarmService.delete(this.alarm);
+    const deleteSub = this.alarmResponseService.getAlarmResponseByAlarm(this.alarm.id).subscribe(r => {
+      r.forEach(response => {
+        console.log('Deleting response ' + response.id);
+        this.alarmResponseService.deleteResponse(response.id);
+      });
+      deleteSub.unsubscribe();
+    });
   }
 
   createResponseObjects() {

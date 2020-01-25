@@ -2,8 +2,6 @@ import { DemoComponent } from './components/demo/demo.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AlarmComponent } from './components/alarm/alarm.component';
 import { AlarmResponseComponent } from './components/alarm-response/alarm-response.component';
-import { UserComponent } from './components/user/user.component';
-import { AlarmListComponent } from './components/alarm-list/alarm-list.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
