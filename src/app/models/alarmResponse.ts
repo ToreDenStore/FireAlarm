@@ -1,10 +1,11 @@
 import { DocumentReference } from '@angular/fire/firestore';
-import * as firebase from 'firebase/app';
+import * as firebase from 'firebase';
+import Timestamp = firebase.firestore.Timestamp;
 
 export interface AlarmResponse {
     id?: string;
     alarmRef: DocumentReference;
-    date: firebase.firestore.Timestamp;
+    date: Timestamp;
     status: number;
     userRef: DocumentReference;
 }
