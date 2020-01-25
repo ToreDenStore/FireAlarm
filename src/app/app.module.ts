@@ -45,7 +45,9 @@ import { FormsModule } from '@angular/forms';
      AlarmResponseService
    ],
    bootstrap: [
-      AppComponent,
+      AppComponent
+   ],
+   entryComponents: [
       AlarmNewComponent
    ]
 })
