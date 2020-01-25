@@ -1,4 +1,5 @@
 import { DocumentReference } from '@angular/fire/firestore';
+import * as firebase from 'firebase/app';
 
 export interface AlarmResponse {
     id?: string;
