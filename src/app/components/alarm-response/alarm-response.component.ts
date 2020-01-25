@@ -35,7 +35,6 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    // this.teamResponses = new Map();
     if (!this.id) {
       this.id = this.route.snapshot.paramMap.get('id');
     }
@@ -47,13 +46,14 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
     console.log('Destroying alarmResponse component ' + this.id);
     this.alarmResponseSubscription.unsubscribe();
     this.alarmSubscription.unsubscribe();
-    // this.teamResponseSubscriptions.forEach(sub => {
-    //   sub.unsubscribe();
-    // });
+    this.userSubscription.unsubscribe();
   }
 
   getAlarmResponse() {
     console.log('Looking for alarm response id: ' + this.id);
+    if (this.alarmResponseSubscription) {
+      this.alarmResponseSubscription.unsubscribe();
+    }
     this.alarmResponseSubscription = this.alarmResponseService.getAlarmResponseById(this.id).subscribe(r => {
       console.log('Alarm Response found for user: ' + r.userRef.id);
       if (!this.alarm || this.alarmResponse.alarmRef.id !== r.alarmRef.id) {
@@ -69,6 +69,9 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
 
   getAlarm(alarmRef: DocumentReference) {
     console.log('Looking for alarm: ' + alarmRef.id);
+    if (this.alarmSubscription) {
+      this.alarmSubscription.unsubscribe();
+    }
     this.alarmSubscription = this.alarmService.getAlarmById(alarmRef.id).subscribe(a => {
       console.log('Alarm found: ' + a.text);
       this.alarm = a;
@@ -78,6 +81,9 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
 
   getUser(userRef: DocumentReference) {
     console.log('Looking for user ' + userRef.id);
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
     this.userSubscription = this.userService.getUserById(userRef.id).subscribe(u => {
       console.log('User found: ' + u.name);
       this.user = u;

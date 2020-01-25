@@ -30,11 +30,10 @@ export class TeamComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnInit() {
     console.log('Initializing team component with manager ' + this.managerSID + ' and alarm ' + this.alarmId);
-    // Subscribe to team members and their names (user service)
-    // Subscribe to member statuses (alarmResponseService)
   }
 
   ngOnChanges() {
+    console.log('Changes detected on team component with manager ' + this.managerSID + ' and alarm ' + this.alarmId);
     this.teamResponses = new Map();
     this.getTeam();
   }
@@ -53,6 +52,7 @@ export class TeamComponent implements OnInit, OnDestroy, OnChanges {
       this.teamSubscription.unsubscribe();
     }
     this.teamSubscription = this.userService.getTeamByManagerSID(this.managerSID).subscribe(team => {
+      console.log('Hello again!');
       console.log('Found team of size ' + team.length + ' with manager ' + this.managerSID);
       this.team = team;
       this.getTeamResponses();

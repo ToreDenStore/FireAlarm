@@ -16,19 +16,19 @@
 </div>
 
 <div *ngIf="alarmResponse;else loadingTemplate">
-    <button [ngClass]="{'rStatusButton': true, 'safeActive': this.alarmResponse.status == 1, 'unActive': this.alarmResponse.status == 0}"
+    <button [ngClass]="{'rStatusButton': true, 'unActive': true, 'safeActive': this.alarmResponse.status == 1}"
     type="button" (click)="setStatus(1)">
         <i [ngClass]="{'fas fa-check-circle fa-3x': true, 'safeColor': true}"></i>
         <div>I am safe</div>
     </button>
     <br>
-    <button [ngClass]="{'rStatusButton': true, 'unsafeActive': this.alarmResponse.status == 2, 'unActive': this.alarmResponse.status == 0}"
+    <button [ngClass]="{'rStatusButton': true, 'unActive': true, 'unsafeActive': this.alarmResponse.status == 2}"
     type="button" (click)="setStatus(2)">
         <i [ngClass]="{'fas fa-exclamation-triangle fa-3x': true, 'unsafeColor': true}"></i>
         <div>I need help!</div>
     </button>
     <br>
-    <button [ngClass]="{'rStatusButton': true, 'homeActive': this.alarmResponse.status == 3, 'unActive': this.alarmResponse.status == 0}"
+    <button [ngClass]="{'rStatusButton': true, 'unActive': true, 'homeActive': this.alarmResponse.status == 3}"
     type="button" (click)="setStatus(3)">
         <i [ngClass]="{'fas fa-home fa-3x': true, 'homeColor': true}"></i>
         <div>I am not at the office/school</div>
