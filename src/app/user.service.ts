@@ -22,18 +22,11 @@ export class UserService {
     return this.afs.doc<User>('users/' + id).valueChanges();
   }
 
-  // getUsersBySID(sid: string) {
-  //   return this.afs.collection<User>('users', ref => {
-  //     return ref.where('sid', '==', sid);
-  //   }).valueChanges();
-  // }
-
-  // async getTeam(userRef: firebase.firestore.DocumentReference) {
-  //   const r = await userRef.get();
-  //   const managerSID = await r.get('manager');
-  //   console.log('User service found manager ' + managerSID + ' for user ' + r.id);
-  //   return this.getTeamByManagerSID(managerSID);
-  // }
+  getUsersBySID(sid: string) {
+    return this.afs.collection<User>('users', ref => {
+      return ref.where('sid', '==', sid);
+    }).valueChanges();
+  }
 
   getTeamByManagerSID(managerSID: string) {
     console.log('Service trying to find team with manager ' + managerSID);
