@@ -14,7 +14,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { UserComponent } from './user/user.component';
+import { UserComponent } from './components/user/user.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
@@ -29,7 +29,8 @@ import { FormsModule } from '@angular/forms';
       AlarmNewComponent,
       AdminComponent,
       DemoComponent,
-      TeamComponent
+      TeamComponent,
+      UserComponent
    ],
    imports: [
       BrowserModule,
