@@ -1,0 +1,53 @@
+
+<div style="margin-top: 2%; margin-bottom: 1%;">
+  <button class="btn btn-lg btn-outline-primary" type="button" (click)="openCreateModal()">
+    + Create new alarm
+  </button>
+</div>
+
+<div class="listDiv">
+  Active alarms:
+  <div *ngIf="alarmsSearching == false;else loadingTemplate">
+    <div *ngIf="activeAlarms.length > 0;else notFoundTemplate">
+      <ng-container *ngFor="let alarm of activeAlarms">
+        <app-alarm [alarm] = alarm></app-alarm>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<div class="listDiv">
+  Scheduled alarms:
+  <div *ngIf="alarmsSearching == false;else loadingTemplate">
+    <div *ngIf="scheduledAlarms.length > 0;else notFoundTemplate">
+      <ng-container *ngFor="let alarm of scheduledAlarms">
+        <app-alarm [alarm] = alarm></app-alarm>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<div class="listDiv">
+  Old alarms:
+  <div *ngIf="alarmsSearching == false;else loadingTemplate">
+    <div *ngIf="oldAlarms.length > 0;else notFoundTemplate">
+      <ng-container *ngFor="let alarm of oldAlarms">
+        <app-alarm [alarm] = alarm></app-alarm>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingTemplate>
+  <hr>
+  <h5>
+    Loading alarms...
+  </h5>
+</ng-template>
+  
+<ng-template #notFoundTemplate>
+  <hr>
+  <h5>
+    No alarm(s) found.
+  </h5>
+</ng-template>

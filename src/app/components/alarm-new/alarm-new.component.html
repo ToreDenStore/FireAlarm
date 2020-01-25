@@ -1,0 +1,21 @@
+
+
+<div class="modal-header">
+  <h4 class="modal-title">New alarm</h4>
+</div>
+<div class="modal-body">
+
+  <div class="input-group mb-3">
+    <input type="text" [(ngModel)]="newAlarm.title" class="form-control" placeholder="Alarm title">
+  </div>
+  <div class="input-group">
+    <textarea [(ngModel)]="newAlarm.text" class="form-control" placeholder="Write the alarm information here"></textarea>
+  </div>
+
+  Set scheduled start date here (optional, in development)
+  <br>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="createNewAlarm()">Save</button>
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>

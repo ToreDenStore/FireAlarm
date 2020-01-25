@@ -1,0 +1,44 @@
+
+<h4 style="margin: 0.4em;">{{alarm.title}} <i class="fas fa-fire fa-2x" style="color: orangered;"></i></h4>
+
+<p>{{alarm.text}}</p>
+
+<br>
+<button type="button" (click)="setStatus(1)" *ngIf="alarm.status == 0">
+  Start alarm and send out messages
+</button>
+
+<br>
+<button type="button" (click)="setStatus(2)" *ngIf="alarm.status == 1">
+  Stop and archive alarm
+</button>
+
+<!-- Statistics Area -->
+<!-- These values should be updated automatically by CF -->
+
+<div style="color: gray;">
+  Statistics area (in development)
+  <br>
+  Users total in group: X
+  <br>
+  Users notified: X
+  <br>
+  Safe: X
+  <br>
+  Unsafe: X
+  <br>
+  Away: X
+  <br>
+  Last Updated: YYYY-MM-DD HH:mm
+</div>
+
+<br>
+<button type="button" (click)="deleteAlarm()">
+  Delete
+</button>
+
+<div class="debug">
+  Debug area:
+  <br>
+  {{alarm | json}}
+</div>

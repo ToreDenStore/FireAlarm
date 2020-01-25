@@ -1,0 +1,24 @@
+
+<!-- <div style="background-color: black; height: 700px;"> -->
+  <div class="demoPhoneCase">
+    <div class="demoPhone">
+      <app-alarm-list></app-alarm-list>
+    </div>
+  </div>
+
+  <div class="demoPhoneCase">
+    <div class="demoPhone">
+      <ng-container *ngFor="let id of responseJonatanUrls">
+        <app-alarm-response [id] = id></app-alarm-response>
+      </ng-container>
+    </div>
+  </div>
+  
+  <div class="demoPhoneCase">
+    <div class="demoPhone">
+      <ng-container *ngFor="let id of responsePavelUrls">
+        <app-alarm-response [id] = id></app-alarm-response>
+      </ng-container>
+    </div>
+  </div>
+
