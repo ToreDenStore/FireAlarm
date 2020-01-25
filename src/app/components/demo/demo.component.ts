@@ -25,10 +25,10 @@ export class DemoComponent implements OnInit, OnDestroy {
         this.responseJonatanUrls = [];
         this.responsePavelUrls = [];
         r.forEach(response => {
-          console.log('Found responses: ' + response.userId.id);
-          if (response.userId.id === '1GHCwk3YVa9JJxuH6Bd4') {
+          console.log('-Demo- Found responses: ' + response.userRef.id);
+          if (response.userRef.id === '1GHCwk3YVa9JJxuH6Bd4') {
             this.responseJonatanUrls.push(response.id);
-          } else if (response.userId.id === 'eXTiHSbQGBZHituQ7l6D') {
+          } else if (response.userRef.id === 'eXTiHSbQGBZHituQ7l6D') {
             this.responsePavelUrls.push(response.id);
           }
         });

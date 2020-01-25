@@ -1,0 +1,23 @@
+Team {{managerSID}}
+<div class="listDiv">
+  <div *ngIf="teamResponses.size > 0">
+      <ng-container *ngFor="let response of teamResponses | keyvalue">
+        <div *ngIf="response.value.status == 1">
+          <i [ngClass]="{'fas fa-check-circle': true, 'safeColor': true}"></i>
+          {{response.key.name}}
+        </div>
+        <div *ngIf="response.value.status == 2" style="font-weight: bold;">
+          <i [ngClass]="{'fas fa-exclamation-triangle': true, 'unsafeColor': true}"></i>
+          {{response.key.name}}
+        </div>
+        <div *ngIf="response.value.status == 3">
+          <i [ngClass]="{'fas fa-home': true, 'homeColor': true}"></i>
+          {{response.key.name}}
+        </div>
+        <div *ngIf="response.value.status == 0">
+          <i [ngClass]="{'fas fa-question': true, 'unActiveColor': true}"></i>
+          {{response.key.name}}
+        </div>
+      </ng-container>
+  </div>
+</div>

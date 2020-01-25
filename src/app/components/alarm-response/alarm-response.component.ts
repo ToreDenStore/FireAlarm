@@ -1,3 +1,5 @@
+import { User } from './../../models/user';
+import { UserService } from './../../user.service';
 import { AlarmService } from 'src/app/services/alarm.service';
 import { AlarmResponseService } from './../../services/alarm-response.service';
 import { AlarmResponse } from './../../models/alarmResponse';
@@ -5,6 +7,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Alarm } from 'src/app/models/alarm';
 import { Subscription } from 'rxjs';
+import { DocumentReference } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-alarm-response',
@@ -15,48 +18,76 @@ export class AlarmResponseComponent implements OnInit, OnDestroy {
 
   @Input()
   id: string;
+
   alarmResponse: AlarmResponse;
+  user: User;
   alarm: Alarm;
+
   alarmResponseSubscription: Subscription;
+  userSubscription: Subscription;
   alarmSubscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
     private alarmResponseService: AlarmResponseService,
-    private alarmService: AlarmService
+    private alarmService: AlarmService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
-    console.log('Initializing alarmResponse component');
+    if (!this.id) {
+      this.id = this.route.snapshot.paramMap.get('id');
+    }
+    console.log('Initializing alarmResponse component ' + this.id);
     this.getAlarmResponse();
   }
 
   ngOnDestroy(): void {
+    console.log('Destroying alarmResponse component ' + this.id);
     this.alarmResponseSubscription.unsubscribe();
     this.alarmSubscription.unsubscribe();
-  }
-
-  getAlarm() {
-    console.log('alarm id: ' + this.alarmResponse.alarmId.id);
-    this.alarmSubscription = this.alarmService.getAlarmById(this.alarmResponse.alarmId.id).subscribe(a => {
-      console.log('alarm found: ' + a.title);
-      this.alarm = a;
-    });
+    this.userSubscription.unsubscribe();
   }
 
   getAlarmResponse() {
-    let alarmResponseId = '';
-    if (this.id) {
-      alarmResponseId = this.id;
-    } else {
-      alarmResponseId = this.route.snapshot.paramMap.get('id');
+    console.log('Looking for alarm response id: ' + this.id);
+    if (this.alarmResponseSubscription) {
+      this.alarmResponseSubscription.unsubscribe();
     }
-    console.log('alarm response id: ' + alarmResponseId);
-    this.alarmResponseSubscription = this.alarmResponseService.getAlarmResponseByRef(alarmResponseId).subscribe(r => {
-      console.log('Alarm Response found: ' + r);
+    this.alarmResponseSubscription = this.alarmResponseService.getAlarmResponseById(this.id).subscribe(r => {
+      console.log('Alarm Response found for user: ' + r.userRef.id);
+      if (!this.alarm || this.alarmResponse.alarmRef.id !== r.alarmRef.id) {
+        this.getAlarm(r.alarmRef);
+      }
+      if (!this.user || this.alarmResponse.userRef.id !== r.userRef.id) {
+        this.getUser(r.userRef);
+      }
       this.alarmResponse = r;
-      this.alarmResponse.id = alarmResponseId;
-      this.getAlarm();
+      this.alarmResponse.id = this.id;
+    });
+  }
+
+  getAlarm(alarmRef: DocumentReference) {
+    console.log('Looking for alarm: ' + alarmRef.id);
+    if (this.alarmSubscription) {
+      this.alarmSubscription.unsubscribe();
+    }
+    this.alarmSubscription = this.alarmService.getAlarmById(alarmRef.id).subscribe(a => {
+      console.log('Alarm found: ' + a.text);
+      this.alarm = a;
+      this.alarm.id = alarmRef.id;
+    });
+  }
+
+  getUser(userRef: DocumentReference) {
+    console.log('Looking for user ' + userRef.id);
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
+    this.userSubscription = this.userService.getUserById(userRef.id).subscribe(u => {
+      console.log('User found: ' + u.name);
+      this.user = u;
+      this.user.id = userRef.id;
     });
   }
 

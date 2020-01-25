@@ -19,35 +19,35 @@ export class UserComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.getUsers();
-    this.getUsersBySid('S1287A');
-    this.getUserByRef('Cgil4sRIOrzxm7KDYlmb');
+    // this.getUsers();
+    // this.getUsersBySid('S1287A');
+    // this.getUserByRef('Cgil4sRIOrzxm7KDYlmb');
   }
 
-  getUsers() {
-    this.usersSearching = true;
-    this.userService.getUsers().subscribe(users => {
-      console.log(users);
-      this.users = users;
-      this.usersSearching = false;
-    });
-  }
+  // getUsers() {
+  //   this.usersSearching = true;
+  //   this.userService.getUsers().subscribe(users => {
+  //     console.log(users);
+  //     this.users = users;
+  //     this.usersSearching = false;
+  //   });
+  // }
 
-  getUsersBySid(sid: string) {
-    this.userBySidSearching = true;
-    this.userService.getUsersBySID(sid).subscribe(users => {
-      console.log(users);
-      this.userBySid = users[0];
-      this.userBySidSearching = false;
-    });
-  }
+  // getUsersBySid(sid: string) {
+  //   this.userBySidSearching = true;
+  //   this.userService.getUsersBySID(sid).subscribe(users => {
+  //     console.log(users);
+  //     this.userBySid = users[0];
+  //     this.userBySidSearching = false;
+  //   });
+  // }
 
-  getUserByRef(ref: string) {
-    this.userByRefSearching = true;
-    this.userService.getUserByRef(ref).subscribe(user => {
-      this.userByRef = user;
-      this.userByRefSearching = false;
-    });
-  }
+  // getUserByRef(ref: string) {
+  //   this.userByRefSearching = true;
+  //   this.userService.getUserById(ref).subscribe(user => {
+  //     this.userByRef = user;
+  //     this.userByRefSearching = false;
+  //   });
+  // }
 
 }
