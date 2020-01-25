@@ -1,3 +1,4 @@
+import { UserService } from './services/user.service';
 import { TeamComponent } from './components/team/team.component';
 import { DemoComponent } from './components/demo/demo.component';
 import { AdminComponent } from './components/admin/admin.component';
@@ -7,7 +8,6 @@ import { AlarmResponseComponent } from './components/alarm-response/alarm-respon
 import { AlarmListComponent } from './components/alarm-list/alarm-list.component';
 import { AlarmService } from './services/alarm.service';
 import { AlarmComponent } from './components/alarm/alarm.component';
-import { UserService } from './user.service';
 import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';

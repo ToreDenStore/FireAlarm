@@ -1,5 +1,5 @@
 import { User } from './../../models/user';
-import { UserService } from './../../user.service';
+import { UserService } from '../../services/user.service';
 import { AlarmService } from 'src/app/services/alarm.service';
 import { AlarmResponseService } from './../../services/alarm-response.service';
 import { AlarmResponse } from './../../models/alarmResponse';

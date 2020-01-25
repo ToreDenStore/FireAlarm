@@ -5,7 +5,7 @@ import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/fire
 import * as firebase from 'firebase/app';
 import Timestamp = firebase.firestore.Timestamp;
 import { Alarm } from '../models/alarm';
-import { UserService } from '../user.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'

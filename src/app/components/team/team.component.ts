@@ -1,5 +1,5 @@
 import { AlarmResponseService } from './../../services/alarm-response.service';
-import { UserService } from './../../user.service';
+import { UserService } from '../../services/user.service';
 import { Component, OnInit, Input, OnDestroy, SimpleChanges, OnChanges } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { Subscription } from 'rxjs';

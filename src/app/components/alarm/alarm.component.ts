@@ -1,5 +1,5 @@
 import { User } from './../../models/user';
-import { UserService } from './../../user.service';
+import { UserService } from '../../services/user.service';
 import { AlarmResponseService } from './../../services/alarm-response.service';
 import { AlarmService } from './../../services/alarm.service';
 import { Component, OnInit, Input } from '@angular/core';
